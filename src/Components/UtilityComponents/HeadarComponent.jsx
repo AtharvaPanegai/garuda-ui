@@ -60,9 +60,7 @@ const HeadarComponent = () => {
 
             <div className='flex items-center gap-4'>
               <div className='sm:flex sm:gap-4'>
-
                 <ButtonComponent text="Login" size="medium" colorScheme="blue"  />
-
                 <ButtonComponent text="Register" size={"medium"} colorScheme="slate" />
               </div>
 
