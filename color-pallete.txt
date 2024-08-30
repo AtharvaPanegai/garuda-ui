@@ -1,0 +1,14 @@
+Primary Colors:
+
+Dark Slate (#1C1E26): Used for background sections and text, giving a dark, sleek feel to the website.
+White (#FFFFFF): Provides clean contrast, predominantly used for text and backgrounds across different sections.
+Light Slate Gray (#F5F6FA): Used for background accents, giving a soft contrast to the dark primary color, ensuring readability.
+Accent Colors:
+
+Bright Blue (#004DFF): This vibrant blue is used for buttons, links, and call-to-action elements, adding a lively and engaging touch to the website.
+Cool Gray (#6D7580): Utilized in borders, icons, and less important text elements, ensuring a balanced design without overwhelming the user.
+Additional Colors:
+
+Soft Green (#4CAF50): Often used for success states and visual emphasis in sections related to uptime or successful performance metrics.
+Soft Red (#FF3B30): Reserved for alerts, warnings, or critical error messages, drawing the user’s attention to issues.
+Pale Yellow (#F6D32D): Occasionally used for highlighting information that requires user attention without being critical.

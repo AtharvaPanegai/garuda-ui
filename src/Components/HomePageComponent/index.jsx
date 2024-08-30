@@ -3,6 +3,7 @@
 import FooterComponent from "../UtilityComponents/FooterComponent";
 import HeadarComponent from "../UtilityComponents/HeadarComponent";
 
+
 const HomePageComponent = () => {
   return (
     <div className=''>
@@ -29,13 +30,13 @@ const HomePageComponent = () => {
             <div className='mt-8 flex flex-wrap justify-center gap-4'>
               <a
                 className='block w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto'
-                href='#'>
+                href='/signup'>
                 Try Now
               </a>
 
               <a
                 className='block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto'
-                href='#'>
+                href='/docs'>
                 Learn More
               </a>
             </div>
@@ -76,12 +77,12 @@ const HomePageComponent = () => {
                 </p>
                 <div className='mt-10 flex items-center justify-center gap-x-6 lg:justify-start'>
                   <a
-                    href='#'
+                    href='/signup'
                     className='rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'>
                     Get started
                   </a>
                   <a
-                    href='#'
+                    href='/docs'
                     className='text-sm font-semibold leading-6 text-white'>
                     Learn more <span aria-hidden='true'>→</span>
                   </a>

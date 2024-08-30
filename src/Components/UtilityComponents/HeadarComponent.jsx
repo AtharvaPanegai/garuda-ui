@@ -1,9 +1,17 @@
 /** @format */
 
+import { Navigate, useNavigate } from "react-router-dom";
 import ButtonComponent from "./ButtonComponent";
+import { useState } from "react";
 
 const HeadarComponent = () => {
-  return (
+    const navigate = useNavigate();
+
+    const _navigateToGivenPage = (pagePath) =>{
+        navigate(pagePath);
+    }
+    
+    return (
     <div>
       <header className='radar-dark-slate-bg'>
         <div className='mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8'>
@@ -26,8 +34,9 @@ const HeadarComponent = () => {
               <ul className='flex items-center gap-6 text-sm'>
                 <li>
                   <a
+                    // onClick={_navigateToGivenPage("/docs")}
                     className='text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75'
-                    href='#'>
+                    href='/docs'>
                     Docs
                   </a>
                 </li>
@@ -35,7 +44,7 @@ const HeadarComponent = () => {
                 <li>
                   <a
                     className='text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75'
-                    href='#'>
+                    href='/pricing'>
                     Pricing
                   </a>
                 </li>
@@ -43,15 +52,15 @@ const HeadarComponent = () => {
                 <li>
                   <a
                     className='text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75'
-                    href='#'>
-                    Community
+                    href='/about'>
+                    Company
                   </a>
                 </li>
 
                 <li>
                   <a
                     className='text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75'
-                    href='#'>
+                    href='/pricing'>
                     Enterprise
                   </a>
                 </li>
@@ -60,8 +69,18 @@ const HeadarComponent = () => {
 
             <div className='flex items-center gap-4'>
               <div className='sm:flex sm:gap-4'>
-                <ButtonComponent text="Login" size="medium" colorScheme="blue"  />
-                <ButtonComponent text="Register" size={"medium"} colorScheme="slate" />
+                <ButtonComponent
+                  text='Login'
+                  size='medium'
+                  colorScheme='blue'
+                  onClickFunction={()=>{_navigateToGivenPage("/signin")}}
+                  />
+                <ButtonComponent
+                  text='Register'
+                  size={"medium"}
+                  colorScheme='slate'
+                  onClickFunction={()=>{_navigateToGivenPage("/signup")}}
+                />
               </div>
 
               <button className='block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden dark:bg-gray-800 dark:text-white dark:hover:text-white/75'>
