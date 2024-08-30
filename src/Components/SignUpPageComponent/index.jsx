@@ -1,6 +1,74 @@
 /** @format */
 
+import { useState } from "react";
+import ButtonComponent from "../UtilityComponents/ButtonComponent";
+import axios from "axios";
+const radarApi = "https://api-radar-api.onrender.com"
 const SignUpPageComponent = () => {
+  // form states
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pageTitle, setPageTitle] = useState("Let's Set up your Radar 🦑");
+  const [pageSubTitle, setPageSubTitle] = useState(
+    " Let's grab your basic information first"
+  );
+  const [companyDesignation, setCompanyDesignation] = useState("");
+
+  const _signupUser = async () => {
+    let userObject = {
+      username: username,
+      emailId: emailId,
+      phoneNumber: phoneNumber,
+      companyName: companyName,
+      password: password,
+    };
+
+    let signupOptions = {
+      method: "post",
+      url: `${radarApi}/api/v1/signup`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: userObject,
+    };
+    axios(signupOptions);
+  };
+
+  const _nextButton = () => {
+    if (pageNumber == 1) {
+      setPageTitle("Let's get email and phone number ");
+      setPageSubTitle("Don't worry we won't spam you 👽");
+    } else if (pageNumber == 2) {
+      setPageTitle("Can we know more about your company ?");
+      setPageSubTitle("We just wanna see how our customers are from 🧠");
+    } else if (pageNumber == 3) {
+      setPageTitle("Let's Secure your account");
+      setPageSubTitle("We will keep it very safe 🤫");
+    }
+    setPageNumber(pageNumber + 1);
+  };
+  const _prevButton = () => {
+    if (pageNumber == 2) {
+      setPageTitle("Let's Set up your Radar 🦑");
+      setPageSubTitle("Let's grab your basic information first");
+    } else if (pageNumber == 3) {
+      setPageTitle("Let's get email and phone number ");
+      setPageSubTitle("Don't worry we won't spam you 👽");
+    } else if (pageNumber == 4) {
+      setPageTitle("Can we know more about your company ?");
+      setPageSubTitle("We just wanna see how our customers are from 🧠");
+    } else if (pageNumber == 5) {
+      setPageTitle("Let's Secure your account");
+      setPageSubTitle("We will keep it very safe 🤫");
+    }
+    setPageNumber(pageNumber - 1);
+  };
+
   return (
     <section className='bg-white dark:bg-gray-900'>
       <div className='lg:grid lg:min-h-screen lg:grid-cols-12'>
@@ -13,7 +81,7 @@ const SignUpPageComponent = () => {
 
           <div className='hidden lg:relative lg:block lg:p-12'>
             <a className='block text-white' href='#'>
-              <span className='sr-only'>Home</span>
+              <span className='sr-only'></span>
               <svg
                 className='h-8 sm:h-10'
                 viewBox='0 0 28 24'
@@ -57,7 +125,7 @@ const SignUpPageComponent = () => {
               </a>
 
               <h1 className='mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl dark:text-white'>
-                Welcome to Squid 🦑
+                Welcome to Radar 🦑
               </h1>
 
               <p className='mt-4 leading-relaxed text-gray-500 dark:text-gray-400'>
@@ -66,88 +134,120 @@ const SignUpPageComponent = () => {
               </p>
             </div>
 
+            <h2 className='mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl'>
+              {pageTitle}
+            </h2>
+
+            <p className='mt-4 leading-relaxed text-white/90'>{pageSubTitle}</p>
+
             <form action='#' className='mt-8 grid grid-cols-6 gap-6'>
-              <div className='col-span-6 sm:col-span-3'>
-                <label
-                  htmlFor='FirstName'
-                  className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
-                  First Name
-                </label>
+              {pageNumber == 1 && (
+                <>
+                  <div className='col-span-6'>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
+                      Name*
+                    </label>
 
-                <input
-                  type='text'
-                  id='FirstName'
-                  name='first_name'
-                  className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
-                />
-              </div>
+                    <input
+                      type='text'
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
+                    />
+                  </div>
 
-              <div className='col-span-6 sm:col-span-3'>
-                <label
-                  htmlFor='LastName'
-                  className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
-                  Last Name
-                </label>
+                  <div className='col-span-6'>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
+                      Username*
+                    </label>
 
-                <input
-                  type='text'
-                  id='LastName'
-                  name='last_name'
-                  className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
-                />
-              </div>
+                    <input
+                      type='text'
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
+                    />
+                  </div>
+                </>
+              )}
 
-              <div className='col-span-6'>
-                <label
-                  htmlFor='Email'
-                  className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
-                  Email
-                </label>
+              {pageNumber == 2 && (
+                <>
+                  <div className='col-span-6 sm:col-span-3'>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
+                      Email*
+                    </label>
 
-                <input
-                  type='email'
-                  id='Email'
-                  name='email'
-                  className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
-                />
-              </div>
+                    <input
+                      type='email'
+                      value={emailId}
+                      onChange={(e) => setEmailId(e.target.value)}
+                      className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
+                    />
+                  </div>
+                  <div className='col-span-6 sm:col-span-3'>
+                    <label
+                      type='text'
+                      className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
+                      Phone Number*
+                    </label>
 
-              <div className='col-span-6 sm:col-span-3'>
-                <label
-                  htmlFor='Password'
-                  className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
-                  Password
-                </label>
+                    <input
+                      type='email'
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
+                    />
+                  </div>
+                </>
+              )}
+              {pageNumber === 3 && (
+                <>
+                  <div className='col-span-6 sm:col-span-3'>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
+                      What's your role in your company?
+                    </label>
 
-                <input
-                  type='password'
-                  id='Password'
-                  name='password'
-                  className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
-                />
-              </div>
+                    <input
+                      type='text'
+                      className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
+                    />
+                  </div>
 
-              <div className='col-span-6 sm:col-span-3'>
-                <label
-                  htmlFor='PasswordConfirmation'
-                  className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
-                  Password Confirmation
-                </label>
+                  <div className='col-span-6  sm:col-span-3'>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
+                      Company Name*
+                    </label>
 
-                <input
-                  type='password'
-                  id='PasswordConfirmation'
-                  name='password_confirmation'
-                  className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
-                />
-              </div>
+                    <input
+                      type='text'
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
+                    />
+                  </div>
+                </>
+              )}
+              {pageNumber === 4 && (
+                <>
+                  <div className='col-span-6'>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-200'>
+                      Password*
+                    </label>
 
+                    <input
+                      type='password'
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className='mt-1 pt-2 pb-2 pt-2 pb-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
+                    />
+                  </div>
+                </>
+              )}
               <div className='col-span-6'>
                 <label htmlFor='MarketingAccept' className='flex gap-4'>
                   <input
                     type='checkbox'
-                    id='MarketingAccept'
-                    name='marketing_accept'
                     className='size-5 rounded-md border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:focus:ring-offset-gray-900'
                   />
 
@@ -177,21 +277,40 @@ const SignUpPageComponent = () => {
                 </p>
               </div>
 
+              {pageNumber === 4 && (
+                <div className='col-span-6 sm:flex sm:items-center sm:gap-4'>
+                  <button onClick={_signupUser} className='inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white'>
+                    Create an account
+                  </button>
+                </div>
+              )}
               <div className='col-span-6 sm:flex sm:items-center sm:gap-4'>
-                <button className='inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white'>
-                  Create an account
-                </button>
-
                 <p className='mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-400'>
                   Already have an account?
                   <a
-                    href='#'
+                    href='/signin'
                     className='text-gray-700 underline dark:text-gray-200'>
                     Log in
                   </a>
                   .
                 </p>
               </div>
+              {pageNumber < 4 && (
+                <ButtonComponent
+                  text={"Next"}
+                  size={"medium"}
+                  colorScheme={"blue"}
+                  onClickFunction={_nextButton}
+                />
+              )}
+              {pageNumber > 1 && (
+                <ButtonComponent
+                  text={"Prev"}
+                  size={"medium"}
+                  colorScheme={"indigo"}
+                  onClickFunction={_prevButton}
+                />
+              )}
             </form>
           </div>
         </main>

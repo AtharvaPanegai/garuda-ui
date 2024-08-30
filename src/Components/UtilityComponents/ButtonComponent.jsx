@@ -3,6 +3,7 @@ const ButtonComponent = ({ size, text,colorScheme, onClickFunction }) => {
     blue: 'bg-blue-500 hover:bg-blue-700 text-white',
     green: 'bg-green-500 hover:bg-green-700 text-white',
     slate: 'bg-slate-500 hover:bg-indigo-500 text-white',
+    indigo: 'bg-indigo-500 hover:bg-slate-500 text-white',
   };
 
   const sizeClasses = {
