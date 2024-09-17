@@ -1,4 +1,41 @@
+/** @format */
+
+import axios from "axios";
+import { useState } from "react";
+import { replace, useNavigation, useNavigate } from "react-router-dom";
+const radarApi = "http://localhost:5094";
+
 const SignInPageComponent = () => {
+  const navigation = useNavigation();
+  const navigate = useNavigate();
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+
+  const _signInUser = async (e) => {
+    e.preventDefault();
+    const userObject = {
+      email: emailId,
+      password: password,
+    };
+
+    let signInOptions = {
+      method: "post",
+      url: `${radarApi}/api/v1/signin`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: userObject,
+    };
+    console.log(signInOptions);
+
+    axios(signInOptions)
+      .then((res) => {
+        navigate("/dashboard", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <section className='bg-white dark:bg-gray-900'>
@@ -36,7 +73,7 @@ const SignInPageComponent = () => {
                 Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
               </p>
 
-              <form action='#' className='mt-8 grid grid-cols-6 gap-6'>
+              <form onSubmit={_signInUser} action='#' className='mt-8 grid grid-cols-6 gap-6'>
                 <div className='col-span-6'>
                   <label
                     htmlFor='Email'
@@ -48,6 +85,8 @@ const SignInPageComponent = () => {
                     type='email'
                     id='Email'
                     name='email'
+                    value={emailId}
+                    onChange={(e) => setEmailId(e.target.value)}
                     className='mt-1 pb-2 pt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
                   />
                 </div>
@@ -63,6 +102,8 @@ const SignInPageComponent = () => {
                     type='password'
                     id='Password'
                     name='password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className='mt-1 pb-2 pt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
                   />
                 </div>
@@ -103,7 +144,10 @@ const SignInPageComponent = () => {
                 </div>
 
                 <div className='col-span-6 sm:flex sm:items-center sm:gap-4'>
-                  <button className='inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white'>
+                  <button
+                    type="submit"
+                    onClick={_signInUser}
+                    className='inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white'>
                     Log In
                   </button>
                 </div>

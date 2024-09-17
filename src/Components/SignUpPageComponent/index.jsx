@@ -3,8 +3,10 @@
 import { useState } from "react";
 import ButtonComponent from "../UtilityComponents/ButtonComponent";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const radarApi = "https://api-radar-api.onrender.com"
 const SignUpPageComponent = () => {
+  const navigate = useNavigate();
   // form states
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -36,7 +38,12 @@ const SignUpPageComponent = () => {
       },
       data: userObject,
     };
-    axios(signupOptions);
+    axios(signupOptions).then((res)=>{
+      navigate("/dashboard",{replace : true});
+      // store the res into redux or anywhere else
+    }).catch((err)=>{
+      console.log(err);
+    })
   };
 
   const _nextButton = () => {
@@ -140,7 +147,7 @@ const SignUpPageComponent = () => {
 
             <p className='mt-4 leading-relaxed text-white/90'>{pageSubTitle}</p>
 
-            <form action='#' className='mt-8 grid grid-cols-6 gap-6'>
+            <form onSubmit={_signupUser} action='#' className='mt-8 grid grid-cols-6 gap-6'>
               {pageNumber == 1 && (
                 <>
                   <div className='col-span-6'>
@@ -279,7 +286,7 @@ const SignUpPageComponent = () => {
 
               {pageNumber === 4 && (
                 <div className='col-span-6 sm:flex sm:items-center sm:gap-4'>
-                  <button onClick={_signupUser} className='inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white'>
+                  <button type="submit" className='inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white'>
                     Create an account
                   </button>
                 </div>
