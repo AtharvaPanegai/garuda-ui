@@ -18,6 +18,7 @@ import DashboardPage from "./Pages/DashboardPage";
 import PricingPage from "./Pages/PricingPage";
 import ContactUsPage from "./Pages/ContactPage";
 import DocsPage from "./Pages/DocsPage";
+import PlayGroundPage from "./Pages/PlayGroundPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
       <Route path='/pricing' element={<PricingPage />} />
       <Route path='/contact' element={<ContactUsPage />} />
       <Route path='/docs' element={<DocsPage />} />
+      <Route path="/playground" element={<PlayGroundPage />} />
       <Route path='/' element={<HomePage />} />
     </>
   )

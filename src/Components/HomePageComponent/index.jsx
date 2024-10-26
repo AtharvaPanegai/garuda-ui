@@ -10,15 +10,17 @@ const HomePageComponent = () => {
       <section className='relative bg-black text-white'>
         <div
           className='absolute inset-0 bg-cover bg-center'
-          style={{
-            backgroundImage: `url('https://betterstack.com/assets/v2/homepage/hero-bg-3a1adb9be5d3a524fe6108c9346d27e84707509449529c0e3070909f56bef100.jpg')`,
-          }}></div>
-        <div className='relative mx-auto max-w-screen-xl px- py-32 lg:flex lg:h-screen lg:items-center'>
+          style={
+            {
+              // backgroundImage: `url('https://betterstack.com/assets/v2/homepage/hero-bg-3a1adb9be5d3a524fe6108c9346d27e84707509449529c0e3070909f56bef100.jpg')`,
+            }
+          }></div>
+        <div className='relative mx-auto max-w-screen-xl py-32 lg:flex lg:h-screen lg:items-center'>
           <div className='mx-auto max-w-3xl text-center'>
-            <h1 className='text-9xl radar-white-text-color font-bold'>
+            <h1 className='text-9xl tracking-tight inline radar-white-text font-semibold'>
               Eliminate
               <br />
-              <span className='font-light'>Downtime</span>
+              <span className='text-8xl font-light bg-gradient-to-r from-rose-700 to-pink-600 bg-clip-text text-transparent'>Downtime</span>
             </h1>
 
             <p className='mx-auto mt-4 max-w-xl sm:text-xl/relaxed'>
@@ -59,10 +61,7 @@ const HomePageComponent = () => {
                   fillOpacity='0.7'
                 />
                 <defs>
-                  <radialGradient id='759c1415-0410-454c-8f7c-9a820de03641'>
-                    <stop stopColor='#7775D6' />
-                    <stop offset={1} stopColor='#6D7580' />
-                  </radialGradient>
+        
                 </defs>
               </svg>
               <div className='mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left'>
@@ -101,6 +100,13 @@ const HomePageComponent = () => {
           </div>
         </div>
       </section>
+      <defs>
+        
+        {/* <radialGradient id='759c1415-0410-454c-8f7c-9a820de03641'>
+          <stop sto pColor='#7775D6' />
+          <stop offset={1} stopColor='#6D7580' />
+        </radialGradient> */}
+      </defs>
       <div className='mx-auto radar-dark-slate-bg px-4 py-8 sm:px-6 sm:py-12 lg:px-8'>
         <div className='mx-auto max-w-3xl text-center'>
           <h2 className='text-3xl font-bold text-gray-900 sm:text-4xl dark:text-white'>
