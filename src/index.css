@@ -12,12 +12,48 @@
           -ms-overflow-style: none;  /* IE and Edge */
           scrollbar-width: none;  /* Firefox */
     }
+}
+
+@layer base {
+    :root {
+      --sidebar-background: 0 0% 98%;
+      --sidebar-foreground: 240 5.3% 26.1%;
+      --sidebar-primary: 240 5.9% 10%;
+      --sidebar-primary-foreground: 0 0% 98%;
+      --sidebar-accent: 240 4.8% 95.9%;
+      --sidebar-accent-foreground: 240 5.9% 10%;
+      --sidebar-border: 220 13% 91%;
+      --sidebar-ring: 217.2 91.2% 59.8%;
+    }
+  
+    .dark {
+      --sidebar-background: 240 5.9% 10%;
+      --sidebar-foreground: 240 4.8% 95.9%;
+      --sidebar-primary: 224.3 76.3% 48%;
+      --sidebar-primary-foreground: 0 0% 100%;
+      --sidebar-accent: 240 3.7% 15.9%;
+      --sidebar-accent-foreground: 240 4.8% 95.9%;
+      --sidebar-border: 240 3.7% 15.9%;
+      --sidebar-ring: 217.2 91.2% 59.8%;
+    }
   }
+  
 
 
 .radar-dark-slate-bg{
-    background-color: #0C0C14;
+    background-color: #000000;
 }
+
+.radar-dark-blur-bg {
+    background: rgba(0, 0, 0, 0.9); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* border: 1px solid rgba(255, 255, 255, 0.2 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+                0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 1rem;
+  }
+  
 
 .radar-white-bg {
     background-color: #FFFFFF;
@@ -26,7 +62,12 @@
 .radar-bright-blue-bg{
     background-color: #5B63D3;
 }
-.radar-white-text-color{
+
+.radar-dark-grey{
+    background-color: slategray;
+}
+
+.radar-white-text{
     color: #FFFFFF;
 }
 
@@ -52,6 +93,31 @@
 
 .radar-pale-yellow{
     color: #F6D32D;
+}
+
+
+@layer base {
+  :root {
+            --radius: 0.5rem;
+            --sidebar-background: 0 0% 98%;
+            --sidebar-foreground: 240 5.3% 26.1%;
+            --sidebar-primary: 240 5.9% 10%;
+            --sidebar-primary-foreground: 0 0% 98%;
+            --sidebar-accent: 240 4.8% 95.9%;
+            --sidebar-accent-foreground: 240 5.9% 10%;
+            --sidebar-border: 220 13% 91%;
+            --sidebar-ring: 217.2 91.2% 59.8%;
+      }
+  .dark {
+            --sidebar-background: 240 5.9% 10%;
+            --sidebar-foreground: 240 4.8% 95.9%;
+            --sidebar-primary: 224.3 76.3% 48%;
+            --sidebar-primary-foreground: 0 0% 100%;
+            --sidebar-accent: 240 3.7% 15.9%;
+            --sidebar-accent-foreground: 240 4.8% 95.9%;
+            --sidebar-border: 240 3.7% 15.9%;
+            --sidebar-ring: 217.2 91.2% 59.8%;
+      }
 }
 
 

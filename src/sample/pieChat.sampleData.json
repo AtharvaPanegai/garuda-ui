@@ -1,0 +1,8 @@
+{
+    "graphData":[
+      { "statusCode": "Status Code 200", "count": 400 },
+      { "statusCode": "Status Code 300", "count": 300 },
+      { "statusCode": "Status Code 400", "count": 300 },
+      { "statusCode": "Status Code 500", "count": 1000 }
+    ]
+}
