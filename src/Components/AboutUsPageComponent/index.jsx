@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import { Activity, AlertCircle, Gauge, Image, Workflow } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
