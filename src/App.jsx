@@ -20,6 +20,7 @@ import ContactUsPage from "./Pages/ContactPage";
 import DocsPage from "./Pages/DocsPage";
 import PlayGroundPage from "./Pages/PlayGroundPage";
 import CreateProjectPage from "./Pages/CreateProjectPage";
+import SettingsPage from "./Pages/SettingsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path='/contact' element={<ContactUsPage />} />
       <Route path='/docs' element={<DocsPage />} />
       <Route path="/createproject" element={<CreateProjectPage />} />
+      <Route path="/settings" element={<SettingsPage />} />
       <Route path="/playground" element={<PlayGroundPage />} />
       <Route path='/' element={<HomePage />} />
     </>
