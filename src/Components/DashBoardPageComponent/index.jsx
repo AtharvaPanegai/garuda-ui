@@ -109,7 +109,7 @@ function DashboardPageComponent() {
   useEffect(() => {
 
     fetchAllProjects();
-    fetchSingleProjectReport(currentUser.projects[0]);
+    fetchSingleProjectReport(currentUser.projects[0] ?? projects[0]._id);
   }, []);
 
 
