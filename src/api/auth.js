@@ -31,3 +31,14 @@ export const signOutUser = async () => {
         throw error;
     }
 }
+
+
+export const updateUser = async(updatedUserObject) =>{
+    try {
+        let updatedUser = await axios.put(`/user/${updateUser._id}`,updatedUserObject);
+        return updatedUser.data.user;
+    } catch (error) {
+        handleApiError(error);
+        throw error;
+    }
+}

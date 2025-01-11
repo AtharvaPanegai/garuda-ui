@@ -85,11 +85,13 @@ function SettingsPageComponent() {
             <div className="flex items-center justify-between">
               <span>Email Notifications</span>
               <Switch
+                label="Email Notitifications are triggered by default"
+                disabled = {true}
                 checked={notifications.email}
                 onCheckedChange={() => handleNotificationChange('email')}
               />
             </div>
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <span>Push Notifications</span>
               <Switch
                 checked={notifications.push}
@@ -102,7 +104,7 @@ function SettingsPageComponent() {
                 checked={notifications.sms}
                 onCheckedChange={() => handleNotificationChange('sms')}
               />
-            </div>
+            </div> */}
           </CardContent>
         </Card>
 

@@ -41,7 +41,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/redux/slices/userSlice";
 
 const COLORS = ["#9333EA", "#A855F7", "#C084FC", "#D8B4FE"];
-const TIME_RANGES = ["24h", "7d", "30d", "90d"];
+// const TIME_RANGES = ["24h", "7d", "30d", "90d"];
 
 function DashboardPageComponent() {
   // states
@@ -173,6 +173,15 @@ function DashboardPageComponent() {
             </li>
             <li>
               <Button
+                variant='ghost'
+                onClick ={()=>_navigateToGivenPage("/projectsettings")}
+                className='w-full justify-start text-white hover:text-[#9333EA] hover:bg-[#9333EA]/10'>
+                <FileText className='mr-2 h-4 w-4' />
+                Project Settings
+              </Button>
+            </li>
+            <li>
+              <Button
                 onClick = {()=>_navigateToGivenPage("/settings")}
                 variant='ghost'
                 className='w-full justify-start text-white hover:text-[#9333EA] hover:bg-[#9333EA]/10'>
@@ -197,7 +206,7 @@ function DashboardPageComponent() {
           <h2 className='text-3xl font-bold text-[#9333EA]'>
             {selectedProject.projectName} Dashboard
           </h2>
-          <div className='flex gap-2'>
+          {/* <div className='flex gap-2'>
             {TIME_RANGES.map((range) => (
               <Button
                 key={range}
@@ -211,7 +220,7 @@ function DashboardPageComponent() {
                 {range}
               </Button>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Project overview cards */}

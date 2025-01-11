@@ -23,6 +23,7 @@ import CreateProjectPage from "./Pages/CreateProjectPage";
 import SettingsPage from "./Pages/SettingsPage";
 import AllApisPage from "./Pages/AllApisPage";
 import InvoicesPage from "./Pages/InvoicesPage";
+import ProjectSettingsPage from "./Pages/ProjectSettingsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
       <Route path="/playground" element={<PlayGroundPage />} />
       <Route path="/apis" element={<AllApisPage />} />
       <Route path="/invoices" element={<InvoicesPage />} />
+      <Route path="/projectsettings" element={<ProjectSettingsPage />}/>
       <Route path='/' element={<HomePage />} />
     </>
   )
