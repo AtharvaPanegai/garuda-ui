@@ -21,6 +21,8 @@ import DocsPage from "./Pages/DocsPage";
 import PlayGroundPage from "./Pages/PlayGroundPage";
 import CreateProjectPage from "./Pages/CreateProjectPage";
 import SettingsPage from "./Pages/SettingsPage";
+import AllApisPage from "./Pages/AllApisPage";
+import InvoicesPage from "./Pages/InvoicesPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +37,8 @@ const router = createBrowserRouter(
       <Route path="/createproject" element={<CreateProjectPage />} />
       <Route path="/settings" element={<SettingsPage />} />
       <Route path="/playground" element={<PlayGroundPage />} />
+      <Route path="/apis" element={<AllApisPage />} />
+      <Route path="/invoices" element={<InvoicesPage />} />
       <Route path='/' element={<HomePage />} />
     </>
   )
