@@ -1,6 +1,3 @@
-/** @format */
-
-"use client";
 import {
   Select,
   SelectContent,
