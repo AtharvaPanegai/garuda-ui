@@ -39,6 +39,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/redux/slices/userSlice";
+import { setAllProjects } from "@/redux/slices/projectSlice";
 
 const COLORS = ["#9333EA", "#A855F7", "#C084FC", "#D8B4FE"];
 // const TIME_RANGES = ["24h", "7d", "30d", "90d"];
@@ -52,7 +53,6 @@ function DashboardPageComponent() {
   const [dashboardData, setDashboardData] = useState(null);
   const [currentUserState, setCurrentUserState] = useState(null);
 
-  
   const [error, setError] = useState("");
 
   // custom Hooks
@@ -65,15 +65,14 @@ function DashboardPageComponent() {
   // redux
   const dispatch = useDispatch();
   let currentUser = useSelector((state) => state.user.userInfo);
+  let allProjects = useSelector((state)=>state.project.allProjects);
 
   const _navigateToGivenPage = (pagePath) => {
     navigate(pagePath);
   };
 
-
-  
   const fetchSingleProjectReport = async (projectId) => {
-    console.log(projectId)
+    console.log(projectId);
     try {
       let fetchedDashboardData = await getDashBoardDataForProject(projectId);
       setDashboardData(fetchedDashboardData);
@@ -92,6 +91,8 @@ function DashboardPageComponent() {
     try {
       let fetchedProjects = await getProjects(currentUser._id);
       setProjects(fetchedProjects);
+      console.log("this is before dispatch", fetchedProjects);
+      dispatch(setAllProjects({ projects: fetchedProjects }));
     } catch (err) {
       console.error("Failed to fetch Projects", JSON.stringify(err));
       setError(
@@ -107,11 +108,11 @@ function DashboardPageComponent() {
   }, [currentUser]);
 
   useEffect(() => {
-
-    fetchAllProjects();
+    if(!allProjects){  
+      fetchAllProjects();
+    }
     fetchSingleProjectReport(currentUser.projects[0] ?? projects[0]._id);
   }, []);
-
 
 
   const _signOutUser = async () => {
@@ -125,8 +126,6 @@ function DashboardPageComponent() {
       setError(err.message || `Failed to Signout!... Something went wrong!`);
     }
   };
-
-
 
   // loading skeleton
   if (projects?.length < 1 || loading || !dashboardData) {
@@ -165,7 +164,7 @@ function DashboardPageComponent() {
             <li>
               <Button
                 variant='ghost'
-                onClick ={()=>_navigateToGivenPage("/invoices")}
+                onClick={() => _navigateToGivenPage("/invoices")}
                 className='w-full justify-start text-white hover:text-[#9333EA] hover:bg-[#9333EA]/10'>
                 <FileText className='mr-2 h-4 w-4' />
                 Invoices
@@ -174,7 +173,7 @@ function DashboardPageComponent() {
             <li>
               <Button
                 variant='ghost'
-                onClick ={()=>_navigateToGivenPage("/projectsettings")}
+                onClick={() => _navigateToGivenPage("/projectsettings")}
                 className='w-full justify-start text-white hover:text-[#9333EA] hover:bg-[#9333EA]/10'>
                 <FileText className='mr-2 h-4 w-4' />
                 Project Settings
@@ -182,7 +181,7 @@ function DashboardPageComponent() {
             </li>
             <li>
               <Button
-                onClick = {()=>_navigateToGivenPage("/settings")}
+                onClick={() => _navigateToGivenPage("/settings")}
                 variant='ghost'
                 className='w-full justify-start text-white hover:text-[#9333EA] hover:bg-[#9333EA]/10'>
                 <Settings className='mr-2 h-4 w-4' />

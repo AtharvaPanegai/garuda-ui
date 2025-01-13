@@ -4,6 +4,7 @@ import {
   _addOnCallPersonForProject,
   _createApiKeyForProject,
   _createProject,
+  _getAllApisforCustomer,
 } from "../api/project";
 import { useState } from "react";
 
@@ -52,5 +53,16 @@ export const useProject = () => {
     }
   };
 
-  return { createProject, createapikey, addOnCallPerson, loading };
+  const getApisInProject = async (projectId,customerId) =>{
+    let getApisObject = {
+      projectId : projectId,
+      customerId : customerId
+    }
+
+    let projectApiResponse = await _getAllApisforCustomer(getApisObject);
+
+    return projectApiResponse.apis;
+  }
+
+  return { createProject, createapikey, addOnCallPerson, getApisInProject, loading };
 };

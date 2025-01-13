@@ -43,3 +43,12 @@ export const _getAllProjectsOfCustomer = async(customerId) =>{
     }
 }
 
+export const _getAllApisforCustomer = async(reqObj)=>{
+    try {
+        let resp = await axios.post("/project/apis",reqObj);
+        return resp.data;
+    } catch (error) {
+        handleApiError(err);
+        throw err;
+    }
+}
