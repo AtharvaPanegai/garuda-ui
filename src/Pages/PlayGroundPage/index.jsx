@@ -1,4 +1,4 @@
-import DashboardCardComponent from '@/Components/UtilityComponents/DashboardCardComponent'
+import DashboardCardComponent from '../../Components/UtilityComponents/DashboardCardComponent'
 import React from 'react'
 
 const PlayGroundPage = () => {

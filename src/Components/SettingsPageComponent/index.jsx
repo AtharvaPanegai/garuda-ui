@@ -5,18 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Switch } from "../ui/switch";
 import { Input } from "../ui/input";
+import { useSelector } from 'react-redux';
 
 function SettingsPageComponent() {
   const [notifications, setNotifications] = useState({
     email: true,
     push: false,
     sms: true,
-  });
-
-  const [user, setUser] = useState({
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    company: 'Acme Inc.',
   });
 
   const handleNotificationChange = (type) => {
@@ -27,6 +22,8 @@ function SettingsPageComponent() {
     const { name, value } = e.target;
     setUser(prev => ({ ...prev, [name]: value }));
   };
+
+  let currentUser = useSelector((state) => state.user.userInfo);
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
@@ -47,7 +44,7 @@ function SettingsPageComponent() {
               <Input
                 id="name"
                 name="name"
-                value={user.name}
+                value={currentUser.username}
                 onChange={handleUserChange}
                 className="bg-black/30 border-gray-700 text-white"
               />
@@ -58,7 +55,7 @@ function SettingsPageComponent() {
                 id="email"
                 name="email"
                 type="email"
-                value={user.email}
+                value={currentUser.emailId}
                 onChange={handleUserChange}
                 className="bg-black/30 border-gray-700 text-white"
               />
@@ -68,7 +65,7 @@ function SettingsPageComponent() {
               <Input
                 id="company"
                 name="company"
-                value={user.company}
+                value={currentUser.companyName}
                 onChange={handleUserChange}
                 className="bg-black/30 border-gray-700 text-white"
               />
@@ -88,11 +85,13 @@ function SettingsPageComponent() {
             <div className="flex items-center justify-between">
               <span>Email Notifications</span>
               <Switch
+                label="Email Notitifications are triggered by default"
+                disabled = {true}
                 checked={notifications.email}
                 onCheckedChange={() => handleNotificationChange('email')}
               />
             </div>
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <span>Push Notifications</span>
               <Switch
                 checked={notifications.push}
@@ -105,7 +104,7 @@ function SettingsPageComponent() {
                 checked={notifications.sms}
                 onCheckedChange={() => handleNotificationChange('sms')}
               />
-            </div>
+            </div> */}
           </CardContent>
         </Card>
 

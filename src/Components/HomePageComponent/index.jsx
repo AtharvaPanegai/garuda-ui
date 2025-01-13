@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ChevronRight, Zap, Shield, BarChart3, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,11 +20,10 @@ const Card = ({ children, className }) => (
 
 export default function LandingPage() {
   const navigate = useNavigate();
-
   const _navigateToGivenPage = (pagePath) =>{
       navigate(pagePath);
   }
-  
+
   return (
     <div className="min-h-screen bg-black text-white">
       <header className="px-4 lg:px-6 h-16 flex items-center fixed w-full bg-black/50 backdrop-blur-sm z-50">

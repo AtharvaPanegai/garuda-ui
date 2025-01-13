@@ -1,4 +1,4 @@
-import CreatePageComponent from '@/Components/CreatePageComponent'
+import CreatePageComponent from '../../Components/CreatePageComponent'
 import React from 'react'
 
 const CreateProjectPage = () => {
