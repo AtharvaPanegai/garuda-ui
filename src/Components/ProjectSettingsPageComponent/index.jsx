@@ -21,9 +21,9 @@ import {
 import { Copy, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useProject } from "@/hooks/useProject";
-import { useApi } from "@/hooks/useApi";
-import { useToast } from "@/hooks/use-toast";
+import { useProject } from "../../hooks/useProject";
+import { useApi } from "../../hooks/useApi";
+import { useToast } from "../../hooks/use-toast";
 
 export default function ProjectSettings() {
 

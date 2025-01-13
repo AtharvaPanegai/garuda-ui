@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { useProject } from "../../hooks/useProject";
 import { useDispatch, useSelector } from "react-redux";
-import { setProjectInfo } from "@/redux/slices/projectSlice";
+import { setProjectInfo } from "../../redux/slices/projectSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function ProjectCreation() {

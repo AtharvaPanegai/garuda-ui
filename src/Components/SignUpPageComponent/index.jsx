@@ -10,8 +10,8 @@ import {
   ArrowLeft,
   ArrowRight,
 } from "lucide-react";
-import { setUserInfo, signUpStart } from "@/redux/slices/userSlice";
-import { useAuth } from "@/hooks/useAuth";
+import { setUserInfo, signUpStart } from "../../redux/slices/userSlice";
+import { useAuth } from "../../hooks/useAuth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

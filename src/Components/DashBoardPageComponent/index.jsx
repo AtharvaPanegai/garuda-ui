@@ -33,13 +33,13 @@ import {
 } from "../ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Switch } from "../ui/switch";
-import { useDashboard } from "@/hooks/useDashboard";
+import { useDashboard } from "../../hooks/useDashboard";
 import DashboardSkeleTon from "./skeleton";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/redux/slices/userSlice";
-import { setAllProjects } from "@/redux/slices/projectSlice";
+import { logout } from "../../redux/slices/userSlice";
+import { setAllProjects } from "../../redux/slices/projectSlice";
 
 const COLORS = ["#9333EA", "#A855F7", "#C084FC", "#D8B4FE"];
 // const TIME_RANGES = ["24h", "7d", "30d", "90d"];

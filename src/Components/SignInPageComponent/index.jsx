@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 // redux
 import { useDispatch } from "react-redux";
-import { setUserInfo, signInStart } from "@/redux/slices/userSlice";
+import { setUserInfo, signInStart } from "../../redux/slices/userSlice";
 
 export default function SignIn() {
   // states

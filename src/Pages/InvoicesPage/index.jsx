@@ -1,4 +1,4 @@
-import InvoicesPageComponent from '@/Components/InvoicesPageComponent'
+import InvoicesPageComponent from '../../Components/InvoicesPageComponent'
 import React from 'react'
 
 const InvoicesPage = () => {
