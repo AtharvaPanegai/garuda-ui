@@ -287,7 +287,7 @@ function DashboardPageComponent() {
         </Card>
 
         {/* Most Affected APIs */}
-        <Card className='bg-black/50 backdrop-blur-sm border border-gray-800 mb-8'>
+        {/* <Card className='bg-black/50 backdrop-blur-sm border border-gray-800 mb-8'>
           <CardHeader className='flex flex-row items-center justify-between'>
             <CardTitle className='text-[#9333EA]'>Project APIs</CardTitle>
             <Button
@@ -331,7 +331,7 @@ function DashboardPageComponent() {
                 ))}
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
 
         {/* Incident Types Chart */}
         <Card className='bg-black/50 backdrop-blur-sm border border-gray-800'>
