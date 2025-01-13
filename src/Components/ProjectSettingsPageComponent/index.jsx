@@ -22,14 +22,14 @@ import {
   TableRow,
 } from "../ui/table";
 import { Copy, RefreshCw } from "lucide-react";
-import { useToast } from "../../hooks/use-toast";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useProject } from "@/hooks/useProject";
 import { useApi } from "@/hooks/useApi";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ProjectSettings() {
-  const { toast } = useToast();
+
 
   // redux hooks
   let allprojects = useSelector((state) => state.project.allprojects);
@@ -40,11 +40,13 @@ export default function ProjectSettings() {
   const [apisState, setApisState] = useState([]);
   const [onCallPersonState, setOnCallPersonState] = useState(allprojects[0].onCallPerson ?? {});
   const [apiMonitoringState, setApiMonitoringState] = useState({});
+  const [projectapiKeyState, setProjectapiKeyState] = useState("");
 
 
   // custom hooks
-  const { getApisInProject,addOnCallPerson } = useProject();
+  const { getApisInProject,addOnCallPerson, createapikey } = useProject();
   const { enableMonitoring, disableMonitoring } = useApi();
+  const { toast } = useToast();
 
   // function to store initial monitoring state for all apis
   const _setApiStateforAllApis = (apis) =>{
@@ -68,13 +70,11 @@ export default function ProjectSettings() {
     setAllProjectsState(allprojects);
     fetchApisAndStore();
     setOnCallPersonState(selectedProject?.onCallPerson || {onCallPersonEmail: '', onCallPersonPhoneNumber: '', onCallPersonName: ''})
+    setProjectapiKeyState(selectedProject?.apiKey || "");
   }, [selectedProject]);
 
   const copyApiKey = () => {
     navigator.clipboard.writeText(selectedProject.apiKey);
-    toast({
-      title: "API key copied to clipboard",
-    });
   };
 
   const _parseapiEndPoint = (apiEndPoint) => {
@@ -82,13 +82,19 @@ export default function ProjectSettings() {
   };
 
   const _handleApiMonitoring = async (apiId,e) => {
-    // console.log(e);
-    console.log(`This is new state for api : ${apiId} is  : ${e}`);
     try {
       if(e){
         await enableMonitoring(apiId)
+        toast({
+          title : "Monitoring is Enabled!",
+          variant : "success"
+        })
       }else if(e === false){
         await disableMonitoring(apiId);
+        toast({
+          title : "Monitoring is Disabled!",
+          variant : "error"
+        })
       }
     } catch (err) {
       console.error(`Unable to change Monitoring prefrences for this API`);
@@ -122,6 +128,22 @@ export default function ProjectSettings() {
       return resp ? resp : alert(`Unable to update oncall person for project`)
     } catch (err) {
       console.error(`Unable to update oncall person for project`);
+      throw err;
+    }
+  }
+
+  const _handleGenApiKey = async () =>{
+    try{
+      let apiCreationObject = {
+        userId : currentUser._id,
+        projectId : selectedProject._id
+      }
+      let newApikey = await createapikey(apiCreationObject);
+
+      setProjectapiKeyState(newApikey);
+      
+    }catch(err){
+      console.error(`Unable to generate api key for this project... try again after sometime `);
       throw err;
     }
   }
@@ -191,7 +213,8 @@ export default function ProjectSettings() {
               <div className='flex gap-2'>
                 <Input
                   readOnly
-                  value={selectedProject?.apiKey || "N/A"}
+                  placeholder = "Generate API Key to start using Garuda API"
+                  value={projectapiKeyState}
                   className='font-mono bg-black border-purple-500/20'
                 />
                 <Button
@@ -203,22 +226,14 @@ export default function ProjectSettings() {
                 </Button>
               </div>
             </div>
-
-            {selectedProject?.apiKey ? (
               <Button
+                onClick={_handleGenApiKey}
+                type="button"
                 variant='outline'
                 className='border-purple-500/20 hover:bg-purple-500 hover:text-white'>
                 <RefreshCw className='mr-2 h-4 w-4' />
-                Regenerate API Key
-              </Button>
-            ) : (
-              <Button
-                variant='outline'
-                className='border-purple-500/20 hover:bg-purple-500 hover:text-white'>
-                <RefreshCw className='mr-2 h-4 w-4' />
-                Generate API Key
-              </Button>
-            )}
+                {selectedProject?.apiKey ? "ReGenerate API Key" : "Generate API Key"}
+              </Button>  
           </div>
 
           {/* <div className="space-y-4">
@@ -270,7 +285,7 @@ export default function ProjectSettings() {
                 className='bg-black border-purple-500/20 focus-visible:ring-purple-500'
               />
               <Input
-                onChang={(e)=>_handleOnCallPersonChange("onCallPersonPhoneNumber",e.target.value)}
+                onChange={(e)=>_handleOnCallPersonChange("onCallPersonPhoneNumber",e.target.value)}
                 placeholder='Phone Number'
                 value={onCallPersonState?.onCallPersonPhoneNumber}
                 className='bg-black border-purple-500/20 focus-visible:ring-purple-500'
