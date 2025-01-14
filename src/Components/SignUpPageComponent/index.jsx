@@ -300,8 +300,8 @@ export default function SignUp() {
           </div>
           <p className='mt-4 text-sm text-gray-400 text-center'>
             By signing up, you agree to our{" "}
-            <a href='/terms' className='text-[#9333EA] hover:underline'>
-              Terms of Service
+            <a href='/refunds' className='text-[#9333EA] hover:underline'>
+              Refund Policy
             </a>{" "}
             and{" "}
             <a href='/privacy' className='text-[#9333EA] hover:underline'>

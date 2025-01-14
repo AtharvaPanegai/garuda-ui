@@ -176,7 +176,7 @@ export default function ContactUsPageComponent() {
             <a href='/privacy' className='text-sm hover:text-[#9333EA]'>
               Privacy
             </a>
-            <a href='/terms' className='text-sm hover:text-[#9333EA]'>
+            <a href='/refunds' className='text-sm hover:text-[#9333EA]'>
               Refunds
             </a>
           </nav>
