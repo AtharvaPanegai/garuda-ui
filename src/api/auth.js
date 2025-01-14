@@ -42,3 +42,13 @@ export const updateUser = async(updatedUserObject) =>{
         throw error;
     }
 }
+
+export const sendMessageFromFrontend = async(messageObject) =>{
+    try{
+        let resp = await axios.post("/supports",messageObject);
+        return resp.data.success || false;
+    }catch(err){
+        handleApiError(err);
+        throw err;
+    }
+}

@@ -29,7 +29,7 @@ export default function LandingPage() {
       <header className="px-4 lg:px-6 h-16 flex items-center fixed w-full bg-black/50 backdrop-blur-sm z-50">
         <a href="/" className="flex items-center justify-center">
           <div className="w-8 h-8 bg-gradient-to-br from-[#9333EA] to-[#C084FC] rounded-full" />
-          <span className="ml-2 text-lg font-bold">Radar</span>
+          <span className="ml-2 text-lg font-bold">Garuda</span>
         </a>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <a onClick = {()=>_navigateToGivenPage("/")} href="#" className="text-sm font-medium hover:text-[#9333EA] transition-colors">
@@ -65,7 +65,7 @@ export default function LandingPage() {
                   </span>
                 </h1>
                 <p className="mx-auto max-w-[700px] text-zinc-400 md:text-xl lg:text-2xl">
-                  Radar empowers you to eliminate downtime and resolve issues before they impact your clients.
+                  Garuda empowers you to eliminate downtime and resolve issues before they impact your clients.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -188,17 +188,20 @@ export default function LandingPage() {
         <div className="container flex flex-col gap-4 px-4 md:px-6 md:flex-row md:items-center md:justify-between mx-auto">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-gradient-to-br from-[#9333EA] to-[#C084FC] rounded-full" />
-            <span className="text-sm">© 2024 Radar. All rights reserved.</span>
+            <span className="text-sm">© 2024 Shreejis Ventures. All rights reserved.</span>
           </div>
           <nav className="flex gap-4 sm:gap-6">
-            <a href="#" className="text-sm hover:text-[#9333EA]">
-              Terms
+            <a href="/refunds" className="text-sm hover:text-[#9333EA]">
+              Refunds
             </a>
-            <a href="#" className="text-sm hover:text-[#9333EA]">
+            <a href="/privacy" className="text-sm hover:text-[#9333EA]">
               Privacy
             </a>
-            <a href="#" className="text-sm hover:text-[#9333EA]">
+            <a href="/contact" className="text-sm hover:text-[#9333EA]">
               Contact
+            </a>
+            <a href="/about" className="text-sm hover:text-[#9333EA]">
+              About
             </a>
           </nav>
         </div>
