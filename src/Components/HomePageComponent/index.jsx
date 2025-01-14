@@ -197,8 +197,11 @@ export default function LandingPage() {
             <a href="/privacy" className="text-sm hover:text-[#9333EA]">
               Privacy
             </a>
-            <a href="mailto:shreejisventures@gmail.com" className="text-sm hover:text-[#9333EA]">
+            <a href="/contact" className="text-sm hover:text-[#9333EA]">
               Contact
+            </a>
+            <a href="/about" className="text-sm hover:text-[#9333EA]">
+              About
             </a>
           </nav>
         </div>
