@@ -37,7 +37,7 @@ const IntegrationGuide = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Integrations</h1>
           <p className="text-xl text-gray-400 mb-8">
-            Connect APIRadar with your favorite tools and services to streamline your workflow.
+            Connect API Garuda with your favorite tools and services to streamline your workflow.
           </p>
         </div>
       </section>

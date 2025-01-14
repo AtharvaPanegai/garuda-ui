@@ -1,7 +1,7 @@
 /** @format */
 
 import { useState } from "react";
-import { signInUser, signUpUser, signOutUser } from "../api/auth";
+import { signInUser, signUpUser, signOutUser, sendMessageFromFrontend } from "../api/auth";
 
 export const useAuth = () => {
   const [loading, setLoading] = useState(false);
@@ -44,5 +44,17 @@ export const useAuth = () => {
     }
   };
 
-  return { signIn, signUp, signOut, loading };
+  const sendMessageToGaruda = async (messageObject) =>{
+    setLoading(true);
+    try{
+      await sendMessageFromFrontend(messageObject);
+    }catch(err){
+      console.error(`Unable to send support requests at the moment`);
+      throw err;
+    }finally{
+      setLoading(false);
+    }
+  }
+
+  return { signIn, signUp, signOut,sendMessageToGaruda, loading };
 };

@@ -117,7 +117,7 @@ const DarkDocsLayout = () => {
             Get started with APIRadar
           </h1>
           <p className="mb-8 text-lg text-gray-400">
-            APIRadar works by scanning all of your API endpoints, monitoring their health, and providing real-time alerts for any issues.
+            API Garuda works by scanning all of your API endpoints, monitoring their health, and providing real-time alerts for any issues.
           </p>
           
           <div className="mb-16">
@@ -128,7 +128,7 @@ const DarkDocsLayout = () => {
                   value="cli"
                   className="rounded-none border-b-2 border-transparent px-4 py-2 font-medium text-gray-400 hover:text-white data-[state=active]:border-[#5B63D3] data-[state=active]:text-[#5B63D3]"
                 >
-                  APIRadar CLI
+                  API Garuda CLI
                 </TabsTrigger>
                 <TabsTrigger
                   value="sdk"
