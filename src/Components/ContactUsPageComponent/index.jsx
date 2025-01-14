@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
-import { toast } from "@/hooks/use-toast";
+import { useAuth } from "../../hooks/useAuth";
+import { toast } from "../../hooks/use-toast";
 
 const Button = ({ children, className, variant, onClick }) => (
   <button
