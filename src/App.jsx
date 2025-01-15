@@ -26,6 +26,7 @@ import InvoicesPage from "./Pages/InvoicesPage";
 import ProjectSettingsPage from "./Pages/ProjectSettingsPage";
 import PrivacyPolicy from "./Pages/PrivacyPolicyPage";
 import RefundPolicy from "./Pages/RefundPolicyPage";
+import TermsAndConditions from "./Pages/TermsConditionsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
       <Route path="/projectsettings" element={<ProjectSettingsPage />}/>
       <Route path="/privacy" element={<PrivacyPolicy />}/>
       <Route path="/refunds" element={<RefundPolicy />}/>
+      <Route path="/terms" element={<TermsAndConditions />}/>
       <Route path='/' element={<HomePage />} />
     </>
   )

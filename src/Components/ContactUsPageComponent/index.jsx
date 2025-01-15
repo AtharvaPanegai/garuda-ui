@@ -179,6 +179,9 @@ export default function ContactUsPageComponent() {
             <a href='/refunds' className='text-sm hover:text-[#9333EA]'>
               Refunds
             </a>
+            <a href='/terms' className='text-sm hover:text-[#9333EA]'>
+              Terms & Conditions
+            </a>
           </nav>
         </div>
       </footer>

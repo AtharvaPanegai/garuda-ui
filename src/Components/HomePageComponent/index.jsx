@@ -197,6 +197,9 @@ export default function LandingPage() {
             <a href="/privacy" className="text-sm hover:text-[#9333EA]">
               Privacy
             </a>
+            <a href="/terms" className="text-sm hover:text-[#9333EA]">
+              Terms & Conditions
+            </a>
             <a href="/contact" className="text-sm hover:text-[#9333EA]">
               Contact
             </a>

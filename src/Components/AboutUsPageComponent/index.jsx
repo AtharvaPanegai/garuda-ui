@@ -188,6 +188,9 @@ export default function AboutUs() {
             <a href="/contact" className="text-sm hover:text-[#9333EA]">
               Contact
             </a>
+            <a href='/terms' className='text-sm hover:text-[#9333EA]'>
+              Terms & Conditions
+            </a>
           </nav>
         </div>
       </footer>
