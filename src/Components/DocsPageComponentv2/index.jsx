@@ -1,8 +1,7 @@
 import React from 'react';
-import { Copy, Terminal, CheckCircle2, ChevronRight } from 'lucide-react';
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useToast } from "@/hooks/use-toast"
+import { Copy, CheckCircle2, ChevronRight } from 'lucide-react';
+import { Button } from "../ui/button"
+import { useToast } from "../../hooks/use-toast"
 
 const CodeBlock = ({ children, language }) => {
   const { toast } = useToast()
