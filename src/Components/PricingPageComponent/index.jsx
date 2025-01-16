@@ -1,152 +1,294 @@
-import React, { useState } from 'react';
-import { Check } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+/** @format */
 
+"use client";
+
+import { useState, useEffect } from "react";
+import { Check, ArrowRight, Zap, Shield, BarChart, X } from "lucide-react";
+import { useToast } from "../../hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 const pricingPlans = [
   {
-    name: "Starter",
-    price: {
-      monthly: 29,
-      annually: 290,
-    },
-    features: [
-      "Up to 5 APIs",
-      "100 requests per second",
-      "7-day data retention",
-      "Email alerts",
-      "Basic analytics",
-    ],
+    name: "Basic",
+    price: 9.99,
+    features: ["Up to 5 API endpoints", "Basic monitoring", "Email support"],
   },
   {
     name: "Pro",
-    price: {
-      monthly: 99,
-      annually: 990,
-    },
+    price: 29.99,
     features: [
-      "Up to 20 APIs",
-      "500 requests per second",
-      "30-day data retention",
-      "Email & SMS alerts",
-      "Advanced analytics",
-      "Custom dashboards",
-      "24/7 support",
+      "Up to 20 API endpoints",
+      "Advanced monitoring",
+      "Priority email support",
+      "Custom alerts",
     ],
   },
   {
     name: "Enterprise",
-    price: {
-      monthly: "Custom",
-      annually: "Custom",
-    },
+    price: "Custom",
     features: [
-      "Unlimited APIs",
-      "Unlimited requests",
-      "1-year data retention",
-      "Priority support",
-      "Custom integrations",
+      "Unlimited API endpoints",
+      "Premium monitoring",
+      "24/7 phone support",
+      "Custom integration",
       "Dedicated account manager",
-      "On-premise deployment option",
     ],
   },
 ];
 
-const PricingPage = () => {
-  const [isAnnual, setIsAnnual] = useState(false);
-  const navigate = useNavigate();
+export default function PricingLandingPage() {
+  const { toast } = useToast();
+  // navigation
+    const navigate = useNavigate();
+  
+    const _navigateToGivenPage = (pagePath) =>{
+        navigate(pagePath);
+    }
+  
 
-  const _navigateToGivenPage = (pagePath) =>{
-      navigate(pagePath);
-  }
+  const [currency, setCurrency] = useState("USD");
+  const [exchangeRate, setExchangeRate] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    apiCount: "",
+    projectCount: "",
+  });
+
+  useEffect(() => {
+    const detectCountry = async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        if (data.country === "IN") {
+          setCurrency("INR");
+          const rate = 85; // 1 USD = 85 INR
+          setExchangeRate(rate);
+        }
+      } catch (error) {
+        console.error("Error detecting country:", error);
+      }
+    };
+
+    detectCountry();
+  }, []);
+
+  const formatPrice = (price) => {
+    if (typeof price === "string") return price;
+    const convertedPrice = price * exchangeRate;
+    return currency === "USD"
+      ? `$${price.toFixed(2)}`
+      : `₹${convertedPrice.toFixed(2)}`;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const messageDescription = `
+Company: ${formData.company}
+Number of APIs: ${formData.apiCount}
+Number of Projects: ${formData.projectCount}
+
+The client is interested in our Enterprise plan and would like more information.
+    `.trim();
+
+    const garudaMessageObject = {
+      name: formData.name,
+      email: formData.email,
+      message: messageDescription,
+    };
+
+    try {
+      await sendMessageToGaruda(garudaMessageObject);
+      toast({
+        title: "Message Sent to Team",
+        description: "We will reach out to you soon!",
+        variant: "success",
+      });
+      setIsModalOpen(false);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        apiCount: "",
+        projectCount: "",
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Mock function for sending message to Garuda
+  const sendMessageToGaruda = async (messageObject) => {
+    // Simulating API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log("Message sent to Garuda:", messageObject);
+    // In a real application, you would make an actual API call here
+  };
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Navigation */}
-      <nav className="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <a href="/" className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
-                APIRadar
+    <div className='min-h-screen bg-black text-white'>
+      {/* Navbar */}
+      <header className='px-4 lg:px-6 h-16 flex items-center fixed w-full bg-black/50 backdrop-blur-sm z-50'>
+        <a href='/' className='flex items-center justify-center'>
+          <div className='w-8 h-8 bg-gradient-to-br from-[#9333EA] to-[#C084FC] rounded-full' />
+          <span className='ml-2 text-lg font-bold'>Garuda</span>
+        </a>
+        <nav className='ml-auto flex gap-4 sm:gap-6'>
+          <a
+            href='/'
+            className='text-sm font-medium hover:text-[#9333EA] transition-colors'>
+            Home
+          </a>
+          <a
+            href='#features'
+            className='text-sm font-medium hover:text-[#9333EA] transition-colors'>
+            Features
+          </a>
+          <a
+            href='#pricing'
+            className='text-sm font-medium hover:text-[#9333EA] transition-colors'>
+            Pricing
+          </a>
+          <a
+            href='/contact'
+            className='text-sm font-medium hover:text-[#9333EA] transition-colors'>
+            Contact
+          </a>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <section className='relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-32'>
+        <div className='absolute inset-0 bg-gradient-to-br from-purple-900 to-black opacity-50'></div>
+        <div className='relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='text-center'>
+            <h1 className='text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl'>
+              Supercharge Your API Monitoring
+            </h1>
+            <p className='mx-auto mt-6 max-w-2xl text-xl text-gray-300'>
+              Get real-time insights, powerful analytics, and unparalleled
+              uptime for your APIs with Garuda.
+            </p>
+            <div className='mt-10 flex justify-center space-x-4'>
+              <a
+                href='#pricing'
+                className='rounded-md bg-purple-600 px-8 py-3 text-lg font-semibold text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600'>
+                View Pricing
+              </a>
+              <a
+                href='#features'
+                className='rounded-md bg-gray-800 px-8 py-3 text-lg font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800'>
+                Learn More
               </a>
             </div>
-            <div className="flex items-center space-x-4">
-              <button onClick = {()=>_navigateToGivenPage("/signin")} className="text-gray-300 hover:text-white">Log In</button>
-              <button onClick = {()=>_navigateToGivenPage("/signup")} className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">
-                Try Now
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Pricing Header */}
-      <section className="pt-32 pb-16 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Simple, transparent pricing</h1>
-          <p className="text-xl text-gray-400 mb-8">
-            Choose the plan that's right for you. All plans come with a 14-day free trial.
-          </p>
-          <div className="flex items-center justify-center mb-12">
-            <span className={`mr-3 ${isAnnual ? 'text-gray-400' : 'text-white'}`}>Monthly</span>
-            <button
-              className={`relative w-14 h-8 rounded-full p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
-                isAnnual ? 'bg-purple-600' : 'bg-gray-600'
-              }`}
-              onClick={() => setIsAnnual(!isAnnual)}
-            >
-              <span
-                className={`block w-6 h-6 rounded-full bg-white transition-transform duration-300 ${
-                  isAnnual ? 'translate-x-6' : ''
-                }`}
-              />
-            </button>
-            <span className={`ml-3 ${isAnnual ? 'text-white' : 'text-gray-400'}`}>Annual (Save 20%)</span>
           </div>
         </div>
       </section>
 
-      {/* Pricing Plans */}
-      <section className="pb-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
+      {/* Features Section */}
+      <section id='features' className='py-20 sm:py-32'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='text-center'>
+            <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
+              Why Choose Garuda?
+            </h2>
+            <p className='mx-auto mt-3 max-w-2xl text-xl text-gray-400'>
+              Powerful features to keep your APIs running smoothly
+            </p>
+          </div>
+          <div className='mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3'>
+            <div className='flex flex-col items-center'>
+              <div className='flex h-16 w-16 items-center justify-center rounded-full bg-purple-600'>
+                <Zap className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='mt-6 text-xl font-semibold'>
+                Real-time Monitoring
+              </h3>
+              <p className='mt-2 text-center text-gray-400'>
+                Get instant alerts and updates on your API's performance.
+              </p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <div className='flex h-16 w-16 items-center justify-center rounded-full bg-purple-600'>
+                <Shield className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='mt-6 text-xl font-semibold'>Advanced Security</h3>
+              <p className='mt-2 text-center text-gray-400'>
+                Protect your APIs with our state-of-the-art security measures.
+              </p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <div className='flex h-16 w-16 items-center justify-center rounded-full bg-purple-600'>
+                <BarChart className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='mt-6 text-xl font-semibold'>Detailed Analytics</h3>
+              <p className='mt-2 text-center text-gray-400'>
+                Gain valuable insights with our comprehensive analytics tools.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id='pricing' className='py-20 sm:py-32'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='text-center'>
+            <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
+              Simple, Transparent Pricing
+            </h2>
+            <p className='mx-auto mt-3 max-w-2xl text-xl text-gray-400'>
+              Choose the plan that's right for you
+            </p>
+          </div>
+          <div className='mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3'>
+            {pricingPlans.map((plan) => (
               <div
                 key={plan.name}
-                className={`bg-gray-900 rounded-lg p-8 border border-gray-800 ${
-                  index === 1 ? 'md:scale-105 md:shadow-lg md:shadow-purple-500/20' : ''
-                }`}
-              >
-                <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
-                <div className="mb-6">
-                  <span className="text-4xl font-bold">
-                    {typeof plan.price[isAnnual ? 'annually' : 'monthly'] === 'number'
-                      ? `$${plan.price[isAnnual ? 'annually' : 'monthly']}`
-                      : plan.price[isAnnual ? 'annually' : 'monthly']}
-                  </span>
-                  {typeof plan.price[isAnnual ? 'annually' : 'monthly'] === 'number' && (
-                    <span className="text-gray-400 ml-2">
-                      /{isAnnual ? 'year' : 'month'}
+                className='rounded-lg bg-gray-900 p-8 shadow-lg ring-1 ring-gray-800 flex flex-col justify-between'>
+                <div>
+                  <h3 className='text-2xl font-semibold text-purple-400'>
+                    {plan.name}
+                  </h3>
+                  <p className='mt-4 flex items-baseline'>
+                    <span className='text-5xl font-extrabold tracking-tight text-white'>
+                      {formatPrice(plan.price)}
                     </span>
-                  )}
+                    {typeof plan.price === "number" && (
+                      <span className='ml-1 text-xl font-semibold text-gray-400'>
+                        /month
+                      </span>
+                    )}
+                  </p>
+                  <ul className='mt-8 space-y-4'>
+                    {plan.features.map((feature) => (
+                      <li key={feature} className='flex items-start'>
+                        <Check className='h-6 w-6 flex-shrink-0 text-purple-500' />
+                        <span className='ml-3 text-gray-300'>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center">
-                      <Check className="w-5 h-5 text-purple-500 mr-2 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
                 <button
-                  onClick = {()=>_navigateToGivenPage("/signup")}
-                  className={`w-full py-2 rounded ${
-                    index === 1
-                      ? 'bg-purple-600 hover:bg-purple-700'
-                      : 'bg-gray-800 hover:bg-gray-700'
-                  }`}
-                >
-                  {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
+                  className='mt-8 w-full rounded-md bg-purple-600 px-6 py-3 text-center text-sm font-semibold text-white shadow hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600'
+                  onClick={() =>
+                    plan.name === "Enterprise" ? setIsModalOpen(true) : null
+                  }>
+                  Get started
                 </button>
               </div>
             ))}
@@ -154,98 +296,142 @@ const PricingPage = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 bg-gray-900">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xl font-semibold mb-2">What happens after my trial ends?</h3>
-              <p className="text-gray-400">
-                After your 14-day trial, you'll be automatically switched to the plan you selected. 
-                You can cancel or change your plan at any time.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Can I change my plan later?</h3>
-              <p className="text-gray-400">
-                Yes, you can upgrade, downgrade, or cancel your plan at any time. Changes will be 
-                reflected in your next billing cycle.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">What payment methods do you accept?</h3>
-              <p className="text-gray-400">
-                We accept all major credit cards, PayPal, and wire transfers for Enterprise plans.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Is there a setup fee?</h3>
-              <p className="text-gray-400">
-                No, there are no setup fees for any of our plans. You only pay for the plan you choose.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to supercharge your API monitoring?</h2>
-          <p className="text-xl text-gray-400 mb-8">
-            Start your 14-day free trial today. No credit card required.
-          </p>
-          <button onClick = {()=>_navigateToGivenPage("/signup")} className="bg-purple-600 hover:bg-purple-700 text-white text-lg px-8 py-4 rounded">
-            Start Free Trial
-          </button>
+      <section className='relative overflow-hidden py-20 sm:py-32'>
+        <div className='absolute inset-0 bg-gradient-to-tl from-purple-900 to-black opacity-50'></div>
+        <div className='relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='text-center'>
+            <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
+              Ready to get started?
+            </h2>
+            <p className='mx-auto mt-6 max-w-2xl text-xl text-gray-300'>
+              Join thousands of developers who trust Garuda for their API
+              monitoring needs.
+            </p>
+            <div className='mt-10 flex justify-center'>
+              <a
+                href='/signup'
+                className='flex items-center rounded-md bg-purple-600 px-8 py-3 text-lg font-semibold text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600'>
+                Start your free trial <ArrowRight className='ml-2 h-5 w-5' />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black border-t border-gray-800 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Product</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white">Features</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Pricing</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Documentation</a></li>
-              </ul>
+      {/* Currency Switcher */}
+      <div className='fixed bottom-4 right-4'>
+        <button
+          onClick={() => setCurrency(currency === "USD" ? "INR" : "USD")}
+          className='rounded-full bg-gray-800 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900'>
+          Switch to {currency === "USD" ? "INR" : "USD"}
+        </button>
+      </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50'>
+          <div className='bg-gray-900 rounded-lg p-8 max-w-md w-full'>
+            <div className='flex justify-between items-center mb-4'>
+              <h3 className='text-xl font-bold text-white'>
+                Enterprise Plan Inquiry
+              </h3>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className='text-gray-400 hover:text-white'>
+                <X className='h-6 w-6' />
+              </button>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Company</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white">About</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Blog</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Careers</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Resources</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white">Community</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Contact</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Support</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white">Privacy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Terms</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Security</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} APIRadar. All rights reserved.</p>
+            <form onSubmit={handleSubmit} className='space-y-4'>
+              <div>
+                <label
+                  htmlFor='name'
+                  className='block text-sm font-medium text-gray-400'>
+                  Name
+                </label>
+                <input
+                  type='text'
+                  id='name'
+                  name='name'
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className='mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500'
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor='email'
+                  className='block text-sm font-medium text-gray-400'>
+                  Email
+                </label>
+                <input
+                  type='email'
+                  id='email'
+                  name='email'
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className='mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500'
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor='company'
+                  className='block text-sm font-medium text-gray-400'>
+                  Company
+                </label>
+                <input
+                  type='text'
+                  id='company'
+                  name='company'
+                  value={formData.company}
+                  onChange={handleInputChange}
+                  className='mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500'
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor='apiCount'
+                  className='block text-sm font-medium text-gray-400'>
+                  Number of APIs
+                </label>
+                <input
+                  type='number'
+                  id='apiCount'
+                  name='apiCount'
+                  value={formData.apiCount}
+                  onChange={handleInputChange}
+                  className='mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500'
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor='projectCount'
+                  className='block text-sm font-medium text-gray-400'>
+                  Number of Projects
+                </label>
+                <input
+                  type='number'
+                  id='projectCount'
+                  name='projectCount'
+                  value={formData.projectCount}
+                  onChange={handleInputChange}
+                  className='mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500'
+                  required
+                />
+              </div>
+              <button
+                type='submit'
+                className='w-full rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900'>
+                Submit Inquiry
+              </button>
+            </form>
           </div>
         </div>
-      </footer>
+      )}
     </div>
   );
-};
-
-export default PricingPage;
+}
