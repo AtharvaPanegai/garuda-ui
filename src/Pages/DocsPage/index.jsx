@@ -1,9 +1,10 @@
-import DocsPageComponent from '../../Components/DocsPageComponent'
+import DocsPageComponentv2 from "@/Components/DocsPageComponentv2"
 
 const DocsPage = () => {
   return (
    <>
-    <DocsPageComponent />
+    {/* <DocsPageComponent /> */}
+    <DocsPageComponentv2 />
    </>
   )
 }
