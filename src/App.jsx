@@ -27,6 +27,9 @@ import ProjectSettingsPage from "./Pages/ProjectSettingsPage";
 import PrivacyPolicy from "./Pages/PrivacyPolicyPage";
 import RefundPolicy from "./Pages/RefundPolicyPage";
 import TermsAndConditions from "./Pages/TermsConditionsPage";
+import ErrorPage from "./Pages/ErrorPage";
+import PageNotFoundPage from "./Pages/PageNotFoundPage";
+import NotAuthenticatedPage from "./Pages/NotAuthenticatedPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,6 +50,9 @@ const router = createBrowserRouter(
       <Route path="/privacy" element={<PrivacyPolicy />}/>
       <Route path="/refunds" element={<RefundPolicy />}/>
       <Route path="/terms" element={<TermsAndConditions />}/>
+      <Route path="/error" element={<ErrorPage />}/>
+      <Route path="/404" element={<PageNotFoundPage />}/>
+      <Route path="/authfailed" element={<NotAuthenticatedPage />}/>
       <Route path='/' element={<HomePage />} />
     </>
   )
