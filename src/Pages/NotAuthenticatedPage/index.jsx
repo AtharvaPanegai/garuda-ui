@@ -1,4 +1,4 @@
-import NotAuthenticatedPageComponent from '@/Components/NotAuthenticatedPageComponent'
+import NotAuthenticatedPageComponent from '../../Components/NotAuthenticatedPageComponent'
 
 const NotAuthenticatedPage = () => {
   return (

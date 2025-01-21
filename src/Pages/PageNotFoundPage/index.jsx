@@ -1,4 +1,4 @@
-import PageNotFoundPageComponent from '@/Components/PageNotFoundComponent'
+import PageNotFoundPageComponent from '../../Components/NotFoundPageComponent'
 import React from 'react'
 
 const PageNotFoundPage = () => {
