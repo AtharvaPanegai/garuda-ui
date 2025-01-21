@@ -30,6 +30,7 @@ import TermsAndConditions from "./Pages/TermsConditionsPage";
 import ErrorPage from "./Pages/ErrorPage";
 import PageNotFoundPage from "./Pages/PageNotFoundPage";
 import NotAuthenticatedPage from "./Pages/NotAuthenticatedPage";
+import ProtectedRoute from "./ProtectedRoutes";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,22 +39,24 @@ const router = createBrowserRouter(
       <Route path='/signup' element={<SignUpPage />} />
       <Route path='/about' element={<AboutUsPage />} />
       <Route path='/contact' element={<ContactUsPage />} />
-      <Route path='/dashboard' element={<DashboardPage />} />
       <Route path='/pricing' element={<PricingPage />} />
       <Route path='/docs' element={<DocsPage />} />
-      <Route path="/createproject" element={<CreateProjectPage />} />
-      <Route path="/settings" element={<SettingsPage />} />
-      <Route path="/playground" element={<PlayGroundPage />} />
-      <Route path="/apis" element={<AllApisPage />} />
-      <Route path="/invoices" element={<InvoicesPage />} />
-      <Route path="/projectsettings" element={<ProjectSettingsPage />}/>
-      <Route path="/privacy" element={<PrivacyPolicy />}/>
-      <Route path="/refunds" element={<RefundPolicy />}/>
-      <Route path="/terms" element={<TermsAndConditions />}/>
-      <Route path="/error" element={<ErrorPage />}/>
-      <Route path="/404" element={<PageNotFoundPage />}/>
-      <Route path="/authfailed" element={<NotAuthenticatedPage />}/>
+      <Route path='/privacy' element={<PrivacyPolicy />} />
+      <Route path='/refunds' element={<RefundPolicy />} />
+      <Route path='/terms' element={<TermsAndConditions />} />
       <Route path='/' element={<HomePage />} />
+      <Route path='/authfailed' element={<NotAuthenticatedPage />} />
+      <Route path='/error' element={<ErrorPage />} />
+      <Route path='/404' element={<PageNotFoundPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path='/dashboard' element={<DashboardPage />} />
+        <Route path='/createproject' element={<CreateProjectPage />} />
+        <Route path='/settings' element={<SettingsPage />} />
+        <Route path='/playground' element={<PlayGroundPage />} />
+        <Route path='/apis' element={<AllApisPage />} />
+        <Route path='/invoices' element={<InvoicesPage />} />
+        <Route path='/projectsettings' element={<ProjectSettingsPage />} />
+      </Route>
     </>
   )
 );

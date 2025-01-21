@@ -118,9 +118,9 @@ function DashboardPageComponent() {
   const _signOutUser = async () => {
     try {
       await signOut();
-      _navigateToGivenPage("/");
-      sessionStorage.clear();
+      _navigateToGivenPage("/signin");
       dispatch(logout());
+      sessionStorage.clear();
     } catch (err) {
       console.error(`Failed to Signout!... Something went wrong!`);
       setError(err.message || `Failed to Signout!... Something went wrong!`);
