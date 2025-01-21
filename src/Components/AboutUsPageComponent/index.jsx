@@ -71,7 +71,7 @@ export default function AboutUs() {
         {/* Our Story Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-black/50 backdrop-blur-sm">
           <div className="container px-4 md:px-6 mx-auto">
-            <div className="grid gap-12 lg:grid-cols-2 items-center">
+            <div className="grid gap-12 items-center">
               <div className="space-y-4">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Story</h2>
                 <p className="text-zinc-400 md:text-lg">
@@ -83,7 +83,7 @@ export default function AboutUs() {
                   Our commitment to innovation and customer satisfaction drives us to continuously improve our platform and services.
                 </p>
               </div>
-              <div className="relative h-[400px] rounded-lg overflow-hidden">
+              {/* <div className="relative h-[400px] rounded-lg overflow-hidden">
                 <img
                   src="/placeholder.svg?height=400&width=600"
                   alt="Garuda team"
@@ -91,7 +91,7 @@ export default function AboutUs() {
                   objectFit="cover"
                   className="rounded-lg"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -143,7 +143,7 @@ export default function AboutUs() {
         </section> */}
 
         {/* Join Us Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-black via-[#3B0764] to-black">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-black via-[#3B0764] to-black">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
@@ -169,7 +169,7 @@ export default function AboutUs() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
 
       <footer className="w-full border-t border-[#3F3F46] py-6 md:py-8">
