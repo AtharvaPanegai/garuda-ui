@@ -209,7 +209,7 @@ app.listen(PORT, () => {
         <div className="container flex flex-col gap-4 px-4 md:px-6 md:flex-row md:items-center md:justify-between mx-auto">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-gradient-to-br from-[#9333EA] to-[#C084FC] rounded-full" />
-            <span className="text-sm">© 2024 Garuda. All rights reserved.</span>
+            <span className="text-sm">© 2025 Shreejis Ventures. All rights reserved.</span>
           </div>
           <nav className="flex gap-4 sm:gap-6">
             <a href="/privacy" className="text-sm hover:text-[#9333EA]">

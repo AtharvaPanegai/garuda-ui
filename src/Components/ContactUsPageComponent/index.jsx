@@ -111,7 +111,7 @@ export default function ContactUsPageComponent() {
                 <div className='space-y-4'>
                   <div className='flex items-center space-x-3'>
                     <Mail className='h-6 w-6 text-[#9333EA]' />
-                    <span>shreejiventures@gmail.com</span>
+                    <span>shreejisventures@gmail.com</span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <Phone className='h-6 w-6 text-[#9333EA]' />
@@ -167,7 +167,7 @@ export default function ContactUsPageComponent() {
         <div className='container flex flex-col gap-4 px-4 md:px-6 md:flex-row md:items-center md:justify-between mx-auto'>
           <div className='flex items-center gap-2'>
             <div className='w-6 h-6 bg-gradient-to-br from-[#9333EA] to-[#C084FC] rounded-full' />
-            <span className='text-sm'>© 2024 Shreejis Ventures. All rights reserved.</span>
+            <span className='text-sm'>© 2025 Shreejis Ventures. All rights reserved.</span>
           </div>
           <nav className='flex gap-4 sm:gap-6'>
             <a href='/about' className='text-sm hover:text-[#9333EA]'>
