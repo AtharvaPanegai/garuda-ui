@@ -31,7 +31,7 @@ export default function RefundPolicy() {
           
           <h3 className="text-lg font-medium text-purple-400 mt-6">Exceptions</h3>
           <p>
-            In exceptional circumstances, such as extended service outages or other situations deemed appropriate by our management, we may consider issuing refunds or service credits. These will be handled on a case-by-case basis at our discretion.
+            In exceptional circumstances, such as extended service outages or other situations deemed appropriate by our management, we may consider issuing refunds in 5-7 Business days or service credits in 3 business days. These will be handled on a case-by-case basis at our discretion.
           </p>
           
           <h3 className="text-lg font-medium text-purple-400 mt-6">Contact Us</h3>
