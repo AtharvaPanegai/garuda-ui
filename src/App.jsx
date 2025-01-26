@@ -46,13 +46,13 @@ const router = createBrowserRouter(
       <Route path='/terms' element={<TermsAndConditions />} />
       <Route path='/' element={<HomePage />} />
       <Route path='/authfailed' element={<NotAuthenticatedPage />} />
+      <Route path='/playground' element={<PlayGroundPage />} />
       <Route path='/error' element={<ErrorPage />} />
       <Route path='/404' element={<PageNotFoundPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path='/dashboard' element={<DashboardPage />} />
         <Route path='/createproject' element={<CreateProjectPage />} />
         <Route path='/settings' element={<SettingsPage />} />
-        <Route path='/playground' element={<PlayGroundPage />} />
         <Route path='/apis' element={<AllApisPage />} />
         <Route path='/invoices' element={<InvoicesPage />} />
         <Route path='/projectsettings' element={<ProjectSettingsPage />} />
