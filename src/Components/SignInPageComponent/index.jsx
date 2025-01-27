@@ -14,6 +14,7 @@ export default function SignIn() {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({})
+  const [signiningIn, setSigniningIn] = useState(false)
 
   // redux states
   const dispatch = useDispatch();
@@ -33,12 +34,13 @@ export default function SignIn() {
     setError(null); 
 
     dispatch(signInStart());
-
+    setSigniningIn(true);
     try {
       const userData = await signIn(emailId, password); 
       console.log('User signed in successfully:', userData);
       localStorage.setItem("token",userData.token);
       dispatch(setUserInfo(userData))
+      setSigniningIn(false);
       _navigateToGivenPage("/dashboard");
     } catch (err) {
       console.error('Sign-in failed:', err.message);
@@ -103,7 +105,7 @@ export default function SignIn() {
                 className='w-full bg-gradient-to-r from-[#9333EA] to-[#C084FC] text-white py-2 px-4 rounded-md hover:from-[#7E22CE] hover:to-[#A855F7] focus:outline-none focus:ring-2 focus:ring-[#9333EA] focus:ring-offset-2 focus:ring-offset-gray-900'
                 onClick={handleSubmit}
               >
-                Sign In
+                {signiningIn ? 'Signing In...' : 'Sign In'}
               </button>
             </div>
           </form>

@@ -31,6 +31,9 @@ import ErrorPage from "./Pages/ErrorPage";
 import PageNotFoundPage from "./Pages/PageNotFoundPage";
 import NotAuthenticatedPage from "./Pages/NotAuthenticatedPage";
 import ProtectedRoute from "./ProtectedRoutes";
+import WorkInProgress from "./Pages/WorkInProgressPage";
+import BetaRoute from "./BetaRoutes";
+import SuggestionsPage from "./Pages/SuggestionsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,7 +42,6 @@ const router = createBrowserRouter(
       <Route path='/signup' element={<SignUpPage />} />
       <Route path='/about' element={<AboutUsPage />} />
       <Route path='/contact' element={<ContactUsPage />} />
-      <Route path='/pricing' element={<PricingPage />} />
       <Route path='/docs' element={<DocsPage />} />
       <Route path='/privacy' element={<PrivacyPolicy />} />
       <Route path='/refunds' element={<RefundPolicy />} />
@@ -48,14 +50,20 @@ const router = createBrowserRouter(
       <Route path='/authfailed' element={<NotAuthenticatedPage />} />
       <Route path='/error' element={<ErrorPage />} />
       <Route path='/404' element={<PageNotFoundPage />} />
+      <Route path='/wip' element={<WorkInProgress />} />
+      <Route element={<BetaRoute />}>
+        <Route path='/pricing' element={<PricingPage />} />
+        <Route path='/invoices' element={<InvoicesPage />} />
+      </Route>
       <Route element={<ProtectedRoute />}>
         <Route path='/dashboard' element={<DashboardPage />} />
         <Route path='/createproject' element={<CreateProjectPage />} />
         <Route path='/settings' element={<SettingsPage />} />
         <Route path='/playground' element={<PlayGroundPage />} />
         <Route path='/apis' element={<AllApisPage />} />
-        <Route path='/invoices' element={<InvoicesPage />} />
         <Route path='/projectsettings' element={<ProjectSettingsPage />} />
+        <Route path='/suggest' element={<SuggestionsPage />} />
+        <Route path='*' element={<PageNotFoundPage />} />
       </Route>
     </>
   )
