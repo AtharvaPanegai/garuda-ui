@@ -1,18 +1,21 @@
-import React from 'react';
-import { Copy, CheckCircle2, ChevronRight } from 'lucide-react';
+import React from "react"
+import { Copy, CheckCircle2, ChevronRight, Server, Zap, Clock } from "lucide-react"
 import { Button } from "../ui/button"
 import { useToast } from "../../hooks/use-toast"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card"
+import { Badge } from "../ui/badge"
+import { FrameworkSupport } from "../UtilityComponents/FrameworkSupportComponent"
 
 const CodeBlock = ({ children, language }) => {
   const { toast } = useToast()
-  
+
   const copyCode = () => {
-    navigator.clipboard.writeText(children);
+    navigator.clipboard.writeText(children)
     toast({
       title: "Code copied to clipboard",
       duration: 2000,
     })
-  };
+  }
 
   return (
     <div className="relative">
@@ -28,11 +31,12 @@ const CodeBlock = ({ children, language }) => {
         <Copy className="h-4 w-4" />
       </Button>
     </div>
-  );
-};
+  )
+}
+
+
 
 export default function DocsPageComponentv2() {
-
   return (
     <div className="min-h-screen bg-black text-white">
       <header className="px-4 lg:px-6 h-16 flex items-center fixed w-full bg-black/50 backdrop-blur-sm z-50">
@@ -65,10 +69,16 @@ export default function DocsPageComponentv2() {
                   </span>
                 </h1>
                 <p className="mx-auto max-w-[700px] text-zinc-400 md:text-xl lg:text-2xl">
-                  Learn how to integrate Garuda's API monitoring into your Express.js applications
+                  Learn how to integrate Garuda's API monitoring into your applications
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-black">
+          <div className="container px-4 md:px-6 mx-auto">
+            <FrameworkSupport />
           </div>
         </section>
 
@@ -78,19 +88,16 @@ export default function DocsPageComponentv2() {
               {/* Installation */}
               <div className="space-y-6">
                 <h2 className="text-3xl font-bold text-purple-500">Installation</h2>
-                <p className="text-zinc-400">
-                  Install the api-radar package using npm:
-                </p>
-                <CodeBlock language="bash">
-                  npm install api-radar
-                </CodeBlock>
+                <p className="text-zinc-400">Install the api-radar package using npm:</p>
+                <CodeBlock language="bash">npm install api-radar</CodeBlock>
               </div>
 
               {/* Setup */}
               <div className="space-y-6">
                 <h2 className="text-3xl font-bold text-purple-500">Setup</h2>
                 <p className="text-zinc-400">
-                  Import and initialize api-radar in your Express.js application's main file (app.js, server.js, or index.js):
+                  Import and initialize api-radar in your Express.js application's main file (app.js, server.js, or
+                  index.js):
                 </p>
                 <CodeBlock language="javascript">
                   {`const express = require('express');
@@ -225,6 +232,6 @@ app.listen(PORT, () => {
         </div>
       </footer>
     </div>
-  );
+  )
 }
 

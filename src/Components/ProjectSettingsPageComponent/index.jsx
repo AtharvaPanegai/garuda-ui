@@ -44,6 +44,8 @@ export default function ProjectSettings() {
   );
   const [apiMonitoringState, setApiMonitoringState] = useState({});
   const [projectapiKeyState, setProjectapiKeyState] = useState("");
+  const [disablecreateNewProject, setDisablecreateNewProject] = useState(false);
+  const [disableMonitoringEnable, setDisableMonitoringEnable] = useState(false);
 
   // custom hooks
   const { getApisInProject, addOnCallPerson, createapikey } = useProject();
@@ -79,7 +81,19 @@ export default function ProjectSettings() {
       }
     );
     setProjectapiKeyState(selectedProject?.apiKey || "");
+    if(allprojects.length >= 2){
+      setDisablecreateNewProject(true);
+    }
   }, [selectedProject]);
+  
+  useEffect(()=>{
+    console.log(`this is api monitoring state : ${countEnabledApis(apiMonitoringState)}`)
+    if(countEnabledApis(apiMonitoringState)>4){
+      setDisableMonitoringEnable(true);
+    }else{
+      setDisableMonitoringEnable(false);
+    }
+  },[apiMonitoringState])
 
   const copyApiKey = () => {
     navigator.clipboard.writeText(selectedProject.apiKey);
@@ -109,6 +123,24 @@ export default function ProjectSettings() {
       throw err;
     }
   };
+
+  function countEnabledApis(fullApiObject) {
+    const keysToIgnore = [
+      "_id",
+      "apiEndPoint",
+      "apiMethod",
+      "project",
+      "customer",
+      "isCurrentlyDown",
+      "isRadarEnabled",
+      "createdAt",
+      "__v",
+    ];
+  
+    return Object.entries(fullApiObject)
+      .filter(([key, value]) => !keysToIgnore.includes(key) && value === true)
+      .length;
+  }
 
   const _handleSwitchChangeForApiMonitoring = (apiId) => {
     setApiMonitoringState((prevState) => {
@@ -193,7 +225,7 @@ export default function ProjectSettings() {
           </Select>
         </div>
         <div>
-          <Button onClick={() => _navigateTo("/createproject")}>
+          <Button disabled={disablecreateNewProject} onClick={() => _navigateTo("/createproject")}>
             <PlusCircleIcon />
             Create New Project
           </Button>
@@ -355,6 +387,7 @@ export default function ProjectSettings() {
                       onCheckedChange={(e) =>
                         _handleSwitchChangeForApiMonitoring(api._id)
                       }
+                      disabled = {apiMonitoringState[api._id] ? false : disableMonitoringEnable}
                       className='data-[state=checked]:bg-purple-500'
                     />
                   </TableCell>

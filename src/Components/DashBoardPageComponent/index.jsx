@@ -20,6 +20,8 @@ import {
   Settings,
   LogOut,
   ChevronRight,
+  LightbulbIcon,
+  Settings2Icon,
 } from "lucide-react";
 
 // Assuming these components are defined elsewhere in your project
@@ -40,6 +42,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/slices/userSlice";
 import { setAllProjects } from "../../redux/slices/projectSlice";
+import { BetaLimitationsPopup } from "../UtilityComponents/BetaLimitationsPopup";
 
 const COLORS = ["#9333EA", "#A855F7", "#C084FC", "#D8B4FE"];
 // const TIME_RANGES = ["24h", "7d", "30d", "90d"];
@@ -52,7 +55,7 @@ function DashboardPageComponent() {
   const [showApiList, setShowApiList] = useState(false);
   const [dashboardData, setDashboardData] = useState(null);
   const [currentUserState, setCurrentUserState] = useState(null);
-
+const [showBetaPopup, setShowBetaPopup] = useState(true);
   const [error, setError] = useState("");
 
   // custom Hooks
@@ -175,7 +178,7 @@ function DashboardPageComponent() {
                 variant='ghost'
                 onClick={() => _navigateToGivenPage("/projectsettings")}
                 className='w-full justify-start text-white hover:text-[#9333EA] hover:bg-[#9333EA]/10'>
-                <FileText className='mr-2 h-4 w-4' />
+                  <Settings2Icon className="mr-2 h-4 w-4" />
                 Project Settings
               </Button>
             </li>
@@ -188,6 +191,15 @@ function DashboardPageComponent() {
                 Account Settings
               </Button>
             </li>
+            <li>
+              <Button
+                onClick={() => _navigateToGivenPage("/suggest")}
+                variant='ghost'
+                className='w-full justify-start text-white hover:text-[#9333EA] hover:bg-[#9333EA]/10'>
+                <LightbulbIcon className="mr-2 h-4 w-4" />
+                Suggest
+              </Button>
+            </li>
           </ul>
         </nav>
         <Button
@@ -198,7 +210,7 @@ function DashboardPageComponent() {
           Logout
         </Button>
       </div>
-
+      {showBetaPopup && <BetaLimitationsPopup onClose={() => setShowBetaPopup(false)} />}
       {/* Main content */}
       <div className='flex-1 p-8 overflow-auto bg-black/80'>
         <div className='flex justify-between items-center mb-6'>

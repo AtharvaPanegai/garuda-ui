@@ -1,27 +1,23 @@
-import React, { useEffect } from 'react';
-import { ChevronRight, Zap, Shield, BarChart3, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React from "react"
+import { ChevronRight, Zap, Shield, BarChart3, ArrowRight } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+const isBeta = import.meta.env.VITE_IS_BETA
 
-const Button = ({ children, className, variant, onClick}) => (
-  <button className={`px-4 py-2 rounded-md ${className} ${
-    variant === 'outline' ? 'border border-current' : ''
-  }`}
-  onClick={onClick}
+const Button = ({ children, className, variant, onClick }) => (
+  <button
+    className={`px-4 py-2 rounded-md ${className} ${variant === "outline" ? "border border-current" : ""}`}
+    onClick={onClick}
   >
     {children}
   </button>
-);
+)
 
-const Card = ({ children, className }) => (
-  <div className={`rounded-lg ${className}`}>
-    {children}
-  </div>
-);
+const Card = ({ children, className }) => <div className={`rounded-lg ${className}`}>{children}</div>
 
 export default function LandingPage() {
-  const navigate = useNavigate();
-  const _navigateToGivenPage = (pagePath) =>{
-      navigate(pagePath);
+  const navigate = useNavigate()
+  const _navigateToGivenPage = (pagePath) => {
+    navigate(pagePath)
   }
 
   return (
@@ -32,21 +28,40 @@ export default function LandingPage() {
           <span className="ml-2 text-lg font-bold">Garuda</span>
         </a>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <a onClick = {()=>_navigateToGivenPage("/")} href="#" className="text-sm font-medium hover:text-[#9333EA] transition-colors">
+          <a
+            onClick={() => _navigateToGivenPage("/")}
+            href="#"
+            className="text-sm font-medium hover:text-[#9333EA] transition-colors"
+          >
             Features
           </a>
-          <a  onClick = {()=>_navigateToGivenPage("/pricing")}href="#" className="text-sm font-medium hover:text-[#9333EA] transition-colors">
+          <a
+            onClick={() => _navigateToGivenPage("/pricing")}
+            href="#"
+            className="text-sm font-medium hover:text-[#9333EA] transition-colors"
+          >
             Pricing
           </a>
-          <a onClick = {()=>_navigateToGivenPage("/docs")} href="#" className="text-sm font-medium hover:text-[#9333EA] transition-colors">
+          <a
+            onClick={() => _navigateToGivenPage("/docs")}
+            href="#"
+            className="text-sm font-medium hover:text-[#9333EA] transition-colors"
+          >
             Docs
           </a>
         </nav>
         <div className="ml-4 flex items-center gap-2">
-          <Button onClick = {()=>_navigateToGivenPage("/signin")} className="bg-[#9333EA] hover:bg-[#7E22CE] text-white">
+          <Button
+            onClick={() => _navigateToGivenPage("/signin")}
+            className="bg-[#9333EA] hover:bg-[#7E22CE] text-white"
+          >
             Login
           </Button>
-          <Button onClick = {()=>_navigateToGivenPage("/signup")} className="bg-white text-black hover:bg-gray-200" variant="outline">
+          <Button
+            onClick={() => _navigateToGivenPage("/signup")}
+            className="bg-white text-black hover:bg-gray-200"
+            variant="outline"
+          >
             Sign Up
           </Button>
         </div>
@@ -54,7 +69,7 @@ export default function LandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full pt-32 pb-12 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32 bg-gradient-to-br from-black via-[#3B0764] to-black">
+        <section className="w-full pt-32 pb-12 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32 bg-gradient-to-br from-[#000000] via-[#3B0764] to-[#000000]">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
@@ -68,43 +83,45 @@ export default function LandingPage() {
                   Garuda empowers you to eliminate downtime and resolve issues before they impact your clients.
                 </p>
               </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button onClick = {()=>_navigateToGivenPage("/signup")} className="bg-[#9333EA] hover:bg-[#7E22CE] text-white px-8 h-12 text-lg">
-                  Start Free Trial
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
+              <div className="flex flex-row gap-2">
                 <Button
-                  onClick = {()=>_navigateToGivenPage("/pricing")}
+                  onClick={() => _navigateToGivenPage("/signup")}
+                  className="bg-[#9333EA] hover:bg-[#7E22CE] text-white px-8 h-12 text-lg"
+                >
+                  {isBeta == 'true'  ? 'Join waiting list' : 'Get Started'}
+                </Button>
+                {/* <Button
+                  onClick={() => _navigateToGivenPage("/pricing")}
                   className="border-[#9333EA] text-[#9333EA] hover:bg-[#9333EA] hover:text-white h-12 text-lg"
                   variant="outline"
                 >
                   View Pricing
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-black/50 backdrop-blur-sm">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-black">
           <div className="container px-4 md:px-6 mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">Why Choose Radar?</h2>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="bg-white/5 backdrop-blur-sm border-[#3F3F46] p-6">
+              <Card className="bg-[#000000] border-[#3F3F46] p-6">
                 <Zap className="h-12 w-12 text-[#9333EA] mb-4" />
                 <h3 className="text-xl font-bold mb-2">Real-time Monitoring</h3>
                 <p className="text-zinc-400">
                   Monitor your API endpoints in real-time with millisecond precision and instant alerts.
                 </p>
               </Card>
-              <Card className="bg-white/5 backdrop-blur-sm border-[#3F3F46] p-6">
+              <Card className="bg-[#000000] border-[#3F3F46] p-6">
                 <Shield className="h-12 w-12 text-[#9333EA] mb-4" />
                 <h3 className="text-xl font-bold mb-2">Advanced Security</h3>
                 <p className="text-zinc-400">
                   Enterprise-grade security with end-to-end encryption and compliance certifications.
                 </p>
               </Card>
-              <Card className="bg-white/5 backdrop-blur-sm border-[#3F3F46] p-6">
+              <Card className="bg-[#000000] border-[#3F3F46] p-6">
                 <BarChart3 className="h-12 w-12 text-[#9333EA] mb-4" />
                 <h3 className="text-xl font-bold mb-2">Detailed Analytics</h3>
                 <p className="text-zinc-400">
@@ -116,33 +133,31 @@ export default function LandingPage() {
         </section>
 
         {/* Pricing Preview Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-t from-black via-[#3B0764] to-black">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-t from-[#000000] via-[#3B0764] to-[#000000]">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>
               <p className="text-xl text-zinc-400">Choose the plan that fits your needs</p>
             </div>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
-              {['Starter', 'Pro', 'Enterprise'].map((plan) => (
-                <Card key={plan} className="bg-white/5 backdrop-blur-sm border-[#3F3F46] p-6">
+              {["Starter", "Pro", "Enterprise"].map((plan) => (
+                <Card key={plan} className="bg-[#000000] border-[#3F3F46] p-6">
                   <h3 className="text-2xl font-bold mb-4">{plan}</h3>
                   <ul className="space-y-2 mb-6">
                     <li className="flex items-center">
                       <ChevronRight className="h-5 w-5 text-[#9333EA] mr-2" />
-                      {plan === 'Starter' ? '1,000' : plan === 'Pro' ? '10,000' : 'Unlimited'} API calls/month
+                      {plan === "Starter" ? "1,000" : plan === "Pro" ? "10,000" : "Unlimited"} API calls/month
                     </li>
                     <li className="flex items-center">
                       <ChevronRight className="h-5 w-5 text-[#9333EA] mr-2" />
-                      {plan === 'Starter' ? 'Basic' : 'Advanced'} analytics
+                      {plan === "Starter" ? "Basic" : "Advanced"} analytics
                     </li>
                     <li className="flex items-center">
                       <ChevronRight className="h-5 w-5 text-[#9333EA] mr-2" />
-                      {plan === 'Enterprise' ? 'Priority' : '24/7'} support
+                      {plan === "Enterprise" ? "Priority" : "24/7"} support
                     </li>
                   </ul>
-                  <Button className="w-full bg-[#9333EA] hover:bg-[#7E22CE] text-white">
-                    Choose {plan}
-                  </Button>
+                  <Button className="w-full bg-[#9333EA] hover:bg-[#7E22CE] text-white">Choose {plan}</Button>
                 </Card>
               ))}
             </div>
@@ -153,7 +168,7 @@ export default function LandingPage() {
               </a>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CTA Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-black">
@@ -168,16 +183,18 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button onClick = {()=>_navigateToGivenPage("/signup")} className="bg-[#9333EA] hover:bg-[#7E22CE] text-white px-8">
-                  Start Free Trial
-                  <Zap className="ml-2 h-4 w-4" />
-                </Button>
                 <Button
+                  onClick={() => _navigateToGivenPage("/signup")}
+                  className="bg-[#9333EA] hover:bg-[#7E22CE] text-white px-8"
+                >
+                {isBeta == 'true'  ? 'Join waiting list' : 'Get Started'}        
+                </Button>
+                {/* <Button
                   className="border-[#9333EA] text-[#9333EA] hover:bg-[#9333EA] hover:text-white"
                   variant="outline"
                 >
                   Schedule a Demo
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
@@ -210,5 +227,6 @@ export default function LandingPage() {
         </div>
       </footer>
     </div>
-  );
+  )
 }
+
