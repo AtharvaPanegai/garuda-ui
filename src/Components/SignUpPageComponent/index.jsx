@@ -259,7 +259,7 @@ export default function SignUp() {
       <div className='w-full max-w-md'>
         <div className='bg-black/50 backdrop-blur-md p-8 rounded-lg shadow-lg'>
           <h2 className='text-3xl font-bold text-white mb-6 text-center'>
-            Sign Up for Radar
+            Sign Up for Garuda
           </h2>
           <form onSubmit={handleSubmit} className='space-y-4'>
             {renderStepContent()}

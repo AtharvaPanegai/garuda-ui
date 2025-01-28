@@ -25,10 +25,10 @@ export function BetaBanner({ onClose }) {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="/beta-features"
+              href="/signup"
               className="text-sm font-medium text-purple-100 hover:text-white transition-colors flex items-center"
             >
-              Explore Beta Features
+              Explore Beta
               <ChevronRight className="ml-1 h-4 w-4" />
             </a>
             <Button
