@@ -30,18 +30,18 @@ export default function LandingPage() {
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <a
             onClick={() => _navigateToGivenPage("/")}
-            href="#"
+            href="#features"
             className="text-sm font-medium hover:text-[#9333EA] transition-colors"
           >
             Features
           </a>
-          <a
+          {/* <a
             onClick={() => _navigateToGivenPage("/pricing")}
             href="#"
             className="text-sm font-medium hover:text-[#9333EA] transition-colors"
           >
             Pricing
-          </a>
+          </a> */}
           <a
             onClick={() => _navigateToGivenPage("/docs")}
             href="#"
@@ -88,7 +88,7 @@ export default function LandingPage() {
                   onClick={() => _navigateToGivenPage("/signup")}
                   className="bg-[#9333EA] hover:bg-[#7E22CE] text-white px-8 h-12 text-lg"
                 >
-                  {isBeta == 'true'  ? 'Join waiting list' : 'Get Started'}
+                Get Started
                 </Button>
                 {/* <Button
                   onClick={() => _navigateToGivenPage("/pricing")}
@@ -103,7 +103,7 @@ export default function LandingPage() {
         </section>
 
         {/* Features Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-black">
+        <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-black">
           <div className="container px-4 md:px-6 mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">Why Choose Radar?</h2>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -179,7 +179,7 @@ export default function LandingPage() {
                   Ready to eliminate downtime?
                 </h2>
                 <p className="mx-auto max-w-[600px] text-zinc-400 md:text-xl">
-                  Join thousands of companies that trust Radar to keep their APIs running smoothly.
+                  Join thousands of companies that trust Garuda to keep their APIs running smoothly.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -187,7 +187,7 @@ export default function LandingPage() {
                   onClick={() => _navigateToGivenPage("/signup")}
                   className="bg-[#9333EA] hover:bg-[#7E22CE] text-white px-8"
                 >
-                {isBeta == 'true'  ? 'Join waiting list' : 'Get Started'}        
+                  Get Started
                 </Button>
                 {/* <Button
                   className="border-[#9333EA] text-[#9333EA] hover:bg-[#9333EA] hover:text-white"
