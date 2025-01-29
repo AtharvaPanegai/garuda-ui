@@ -132,6 +132,7 @@ export default function ProjectCreation() {
   };
 
   const generateApiKey = async () => {
+    setLoading(true);
     if(createdProject){
       let apiKeyCreationObject = {
         userId : currentUser._id,
@@ -237,7 +238,7 @@ export default function ProjectCreation() {
                 type="button"
                 onClick={generateApiKey}
                 className='w-full bg-[#9333EA] text-white py-2 px-4 rounded-md hover:bg-[#7E22CE] focus:outline-none focus:ring-2 focus:ring-[#9333EA] focus:ring-offset-2 focus:ring-offset-gray-900'>
-                Generate API Key
+               {loading ?  "Generating API Key..." : "Generate API key"}
               </button>
             )}
           </div>

@@ -28,6 +28,7 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
   const [error, setError] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   // custom hooks
   const { signUp } = useAuth();
@@ -238,6 +239,7 @@ export default function SignUp() {
   };
 
   const handleSubmit = async (event) => {
+    setIsLoading(true);
     event.preventDefault();
     setError(null);
 
@@ -245,6 +247,7 @@ export default function SignUp() {
 
     try {
       const userData = await signUp(formData);
+      setIsLoading(false);
       console.log("user signup sucessfully", userData);
       localStorage.setItem("token", userData.token);
       dispatch(setUserInfo(userData));
@@ -284,9 +287,10 @@ export default function SignUp() {
               )}
               {step === 3 && (
                 <button
+                  disabled = {isLoading ? true : false}
                   type='submit'
                   className='w-full ml-5 bg-gradient-to-r from-[#9333EA] to-[#C084FC] text-white py-2 px-4 rounded-md hover:from-[#7E22CE] hover:to-[#A855F7] focus:outline-none focus:ring-2 focus:ring-[#9333EA] focus:ring-offset-2 focus:ring-offset-gray-900'>
-                  Sign Up
+                  {isLoading ? "Signing Up..." : "Sign Up"}
                 </button>
               )}
             </div>
