@@ -38,6 +38,7 @@ import SuggestionsPage from "./Pages/SuggestionsPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+    <Route errorElement={<ErrorPage />}>
       <Route path='/signin' element={<SignInPage />} />
       <Route path='/signup' element={<SignUpPage />} />
       <Route path='/about' element={<AboutUsPage />} />
@@ -65,6 +66,7 @@ const router = createBrowserRouter(
         <Route path='/suggest' element={<SuggestionsPage />} />
         <Route path='*' element={<PageNotFoundPage />} />
       </Route>
+    </Route>
     </>
   )
 );
