@@ -6,9 +6,9 @@ import { setAllProjects } from "../../redux/slices/projectSlice"
 import { useDashboard } from "../../hooks/useDashboard"
 import { useAuth } from "../../hooks/useAuth"
 import { BetaLimitationsPopup } from "../UtilityComponents/BetaLimitationsPopup"
-import DashboardSidebar from "./DashboardSidebar"
-import DashboardContent from "./DashboardContent"
 import DashboardSkeleton from "./skeleton"
+import DashboardSidebar from "./DashBoardSidebar"
+import DashboardContent from "./DashboardContent"
 
 function DashboardPageComponent() {
   const [selectedProject, setSelectedProject] = useState(null)
