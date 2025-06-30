@@ -27,29 +27,24 @@ export default function ProjectCreation() {
   const [createdProject, setCreatedProject] = useState(null);
 
   // custom hooks
-  const { createProject,createapikey,addOnCallPerson } = useProject();
+  const { createProject, createapikey, addOnCallPerson } = useProject();
 
   // redux
   const dispatch = useDispatch();
 
-
   // get current user
   let currentUser = useSelector((state) => state.user.userInfo);
-  
-  
+
   // get created project
 
-  let currentProject = useSelector((state)=>state.project.projectInfo)
-
-
+  let currentProject = useSelector((state) => state.project.projectInfo);
 
   // navigation
   const navigate = useNavigate();
 
-  const _navigateToGivenPage = (pagePath) =>{
-      navigate(pagePath);
-  }
-
+  const _navigateToGivenPage = (pagePath) => {
+    navigate(pagePath);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -86,64 +81,92 @@ export default function ProjectCreation() {
     }
   };
 
-  
-
   const handleNext = async () => {
-    console.log(`This is current project : ${currentProject}`)
+    console.log(`This is current project : ${currentProject}`);
     if (step === 1) {
-      if(!formData.projectName){
-
+      if (!formData.projectName) {
         setErrors((prev) => ({
           ...prev,
           projectName: "Project name is required",
         }));
       }
-      console.log(currentUser)
+      console.log(currentUser);
       // add project creation here
       let projectCreationObject = {
-        userId : currentUser._id,
-        projectName : formData.projectName
+        userId: currentUser._id,
+        projectName: formData.projectName,
+      };
+
+      if( errors.projectName) {
+        return; // Prevent proceeding if there are errors
       }
 
       let project = await createProject(projectCreationObject);
       setCreatedProject(project);
-      dispatch(setProjectInfo(project))
+      dispatch(setProjectInfo(project));
     }
     if (step === 2) {
+      if (!formData.onCallEmail) {
+        setErrors((prev) => ({
+          ...prev,
+          onCallEmail: "EmailId of OnCall person is required",
+        }));
+      }
+      if (!formData.onCallPhone) {
+        setErrors((prev) => ({
+          ...prev,
+          onCallPhone: "Phone number of OnCall person is required",
+        }));
+      }
+      if (!formData.onCallName) {
+        setErrors((prev) => ({
+          ...prev,
+          onCallName: "Name of OnCall person is required",
+        }));
+      }
+
+      if (
+        errors.onCallEmail ||
+        errors.onCallPhone ||
+        errors.onCallName
+      ) {
+        return; 
+      }
       // add the oncall person here
       let onCallPersonCreationObject = {
-        "onCallPersonEmail": formData.onCallEmail ,
-        "onCallPersonPhoneNumber": formData.onCallPhone ,
-        "onCallPersonName": formData.onCallName,
-        "projectId": createdProject?._id
-      }
-  
-      let onCallPeronCreationResponse = await addOnCallPerson(onCallPersonCreationObject);
+        onCallPersonEmail: formData.onCallEmail,
+        onCallPersonPhoneNumber: formData.onCallPhone,
+        onCallPersonName: formData.onCallName,
+        projectId: createdProject?._id,
+      };
 
+      let onCallPeronCreationResponse = await addOnCallPerson(
+        onCallPersonCreationObject
+      );
     }
     setStep((prevStep) => prevStep + 1);
-    return
+    return;
   };
 
   const handlePrev = () => {
-    console.log(formData)
+    console.log(formData);
 
     setStep((prevStep) => prevStep - 1);
   };
 
   const generateApiKey = async () => {
     setLoading(true);
-    if(createdProject){
+    if (createdProject) {
       let apiKeyCreationObject = {
-        userId : currentUser._id,
-        projectId : createdProject._id
-      }
+        userId: currentUser._id,
+        projectId: createdProject._id,
+      };
       let apiKey = await createapikey(apiKeyCreationObject);
       setFormData((prev) => ({ ...prev, apiKey }));
       return;
-    }else{
-      setErrors({message : "Project is not created yet !"})
-      return 
+    } else {
+      setErrors({ message: "Project is not created yet !" });
+      return;
     }
   };
 
@@ -152,8 +175,16 @@ export default function ProjectCreation() {
     alert("API key copied to clipboard");
   };
 
+  const handleFormKeyDown = async (e) => {
+    if (e.key === "Enter") {
+      if (step < 3) {
+        e.preventDefault();
+        await handleNext();
+      }
+    }
+  };
   const handleSubmit = async (e) => {
-    console.log("handle submit is being called")
+    console.log("create project handle submit is being called");
 
     e.preventDefault();
     // Validate all fields before submission
@@ -164,7 +195,7 @@ export default function ProjectCreation() {
     if (Object.values(errors).some((error) => error !== "")) {
       alert("Please correct the errors before submitting");
       return;
-    }    
+    }
     _navigateToGivenPage("/dashboard");
     console.log("Project created:", formData);
     // Here you would typically send the form data to your backend
@@ -235,10 +266,11 @@ export default function ProjectCreation() {
             </div>
             {!formData.apiKey && (
               <button
-                type="button"
+                disabled={loading ? true : false}
+                type='button'
                 onClick={generateApiKey}
                 className='w-full bg-[#9333EA] text-white py-2 px-4 rounded-md hover:bg-[#7E22CE] focus:outline-none focus:ring-2 focus:ring-[#9333EA] focus:ring-offset-2 focus:ring-offset-gray-900'>
-               {loading ?  "Generating API Key..." : "Generate API key"}
+                {loading ? "Generating API Key..." : "Generate API key"}
               </button>
             )}
           </div>
@@ -263,7 +295,10 @@ export default function ProjectCreation() {
     <div className='min-h-screen bg-gradient-to-br from-black to-[#3B0764] flex items-center justify-center p-4'>
       <div className='w-full max-w-md'>
         <div className='bg-black/50 backdrop-blur-md p-8 rounded-lg shadow-lg'>
-          <form onSubmit={handleSubmit} className='space-y-6'>
+          <form
+            onKeyDown={handleFormKeyDown}
+            onSubmit={step < 3 ? (e) => e.preventDefault() : handleSubmit}
+            className='space-y-6'>
             {renderStepContent()}
             <div className='flex justify-between mt-6'>
               {step > 1 && (
