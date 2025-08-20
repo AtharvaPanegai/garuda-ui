@@ -74,22 +74,37 @@ function DashboardContent({ selectedProject, dashboardData }) {
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
-                data={dashboardData?.statusSummaryArray}
+                data={dashboardData?.statusSummaryArray && dashboardData.statusSummaryArray.length > 0 
+                  ? dashboardData.statusSummaryArray 
+                  : [{ name: "No Data Available", value: 1 }]}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
                 outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }) => {
+                  if (name && name !== "undefined") {
+                    return `${name} ${(percent * 100).toFixed(0)}%`
+                  }
+                  return "No Data"
+                }}
               >
-                {dashboardData?.statusSummaryArray.map((entry, index) => (
+                {(dashboardData?.statusSummaryArray && dashboardData.statusSummaryArray.length > 0 
+                  ? dashboardData.statusSummaryArray 
+                  : [{ name: "No Data Available", value: 1 }]).map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
               <Tooltip
                 contentStyle={{ backgroundColor: "rgba(0, 0, 0, 0.8)", border: "1px solid #444" }}
                 labelStyle={{ color: "#9333EA" }}
+                formatter={(value, name) => {
+                  if (name && name !== "undefined") {
+                    return [value, name];
+                  }
+                  return [value, "Unknown Status"];
+                }}
               />
             </PieChart>
           </ResponsiveContainer>
