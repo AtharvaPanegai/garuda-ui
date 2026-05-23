@@ -1,4 +1,4 @@
-Primary Colors:
+Primary Colors
 
 Dark Slate (#1C1E26): Used for background sections and text, giving a dark, sleek feel to the website.
 White (#FFFFFF): Provides clean contrast, predominantly used for text and backgrounds across different sections.
